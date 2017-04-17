@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 16:14:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 16:55:50 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/17 16:59:20 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			if (portal == 0)
+			if (portal == 1)
 				hit = 1;
 			if (portal == 3)
 			{
@@ -59,7 +59,7 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
 		{
 			env()->side = 1;
-			if (portal == 0)
+			if (portal == 1)
 				hit = 1;
 			if (portal == 3)
 			{
