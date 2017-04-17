@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/30 20:00:38 by vcombey           #+#    #+#             */
+/*   Updated: 2017/04/17 10:42:16 by vcombey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include "libft/libft.h"
+#include <mlx.h>
+#include "wolf.h"
+#include <math.h>
+
+int		quit(void *param)
+{
+	(void)param;
+	exit(0);
+	return (0);
+}
+
+int		main(int ac, char **av)
+{
+	int		ret;
+
+	if (ac != 2)
+		return (ft_retmsg("Usage: ./wolf3d [map]", 2));
+	ret = 1;
+	init_cam();
+	if (init_env(av[1]) == 1)
+		return (1);
+	init_texture();
+	//mlx_do_key_autorepeatoff(env()->mlx);
+	mlx_hook(env()->win, KEYPRESS, KEYPRESSMASK, &ft_key_pressed, NULL);
+	mlx_hook(env()->win, KEYRELEA, KEYRELEAMASK, &ft_key_release, NULL);	
+	mlx_hook(env()->win, 17, 1, &quit, NULL);
+	ft_wolf();
+	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);
+	mlx_put_image_to_window(env()->mlx, env()->win, texture()->img, 0, 0);
+	mlx_loop_hook(env()->mlx, ft_move, NULL);
+	mlx_loop(env()->mlx);
+	return (0);
+}
