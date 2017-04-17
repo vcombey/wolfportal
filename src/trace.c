@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 15:06:28 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/17 17:33:24 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void		ft_trace_colone(int x, double dist_wall)
 
 void	trace_portail(int x, double dist_wall, int color)
 {
-	int	lineheight;
-	int	draw_start;
-	int	draw_end;
-	double			wallx;
-	int				texx;
-	int				y;
+	int		lineheight;
+	int		draw_start;
+	int		draw_end;
+	double	wallx;
+	int		texx;
+	int		y;
 
 
 	lineheight = (int)(SCREEN_HEIGHT / dist_wall);
@@ -91,7 +91,7 @@ void	trace_portail(int x, double dist_wall, int color)
 	if (env()->side == 1 && env()->ray_dir.y < 0)
 		texx = 100 - texx - 1;
 	y = draw_start;
-	if (texx == 0 || texx == 100)
+	if (texx == 0 || texx == 99)
 	{
 		while (y < draw_end)
 		{
