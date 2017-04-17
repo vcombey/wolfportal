@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 14:50:10 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:31:31 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct		s_env
 	t_double_pos	ray_dir;
 	t_int_pos		red;
 	t_int_pos		blue;
+	char			sidered;
+	char			sideblue;
 }					t_env;
 
 typedef struct		s_key

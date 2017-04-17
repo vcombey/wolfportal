@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 16:14:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 16:59:20 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/17 19:16:31 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@
 
 #include "wolf.h"
 #include "math.h"
+#include <stdio.h>
+
+int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_dist)
+{
+	//printf("wall.x-> %d\n", env()->wall.x);
+	if (portal == 3)
+	{
+		trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
+		env()->wall.x = env()->blue.x + 1;
+		env()->wall.y = env()->blue.y;
+		step->x *= -1;
+	}
+	else if (portal == 4)
+	{
+		trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
+		env()->wall.x = env()->red.x + 1;
+		env()->wall.y = env()->red.y;
+		step->x *= -1;
+	}
+	//printf("wall.x-> %d", env()->wall.x);
+	if (portal == 1)
+		return (1);
+	return (0);
+}
 
 double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		t_double_pos ray_dir, int x)
@@ -41,38 +65,12 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			if (portal == 1)
-				hit = 1;
-			if (portal == 3)
-			{
-				trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
-				env()->wall.x = env()->blue.x;
-				env()->wall.y = env()->blue.y - 1;
-			}
-			else if (portal == 4)
-			{
-				trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
-				env()->wall.x = env()->red.x;
-				env()->wall.y = env()->red.y + 1;
-			}
+			hit = ft_hit(x, proj, portal, &step, side_dist);
 		}
 		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
 		{
 			env()->side = 1;
-			if (portal == 1)
-				hit = 1;
-			if (portal == 3)
-			{
-				trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
-				env()->wall.x = env()->blue.x;
-				env()->wall.y = env()->blue.y - 1;
-			}
-			else if (portal == 4)
-			{
-				trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
-				env()->wall.x = env()->red.x;
-				env()->wall.y = env()->red.y + 1;
-			}
+			hit = ft_hit(x, proj, portal, &step, side_dist);
 		}
 		else if (side_dist.x < side_dist.y)
 		{
