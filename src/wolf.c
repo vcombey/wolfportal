@@ -3,10 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/17 16:14:32 by vcombey           #+#    #+#             */
+/*   Updated: 2017/04/17 16:55:50 by vcombey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 14:50:34 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/17 16:14:29 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +29,52 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		t_double_pos ray_dir, int x)
 {
 	int hit;
+	int	portal;
+	double proj;
 
 	hit = 0;
+	proj = sqrt(((ray_dir.y * ray_dir.y) + (ray_dir.x * ray_dir.x)));
 	env()->wall.x = (int)cam()->pos.x;
 	env()->wall.y = (int)cam()->pos.y;
 	while (hit == 0)
 	{
-		if (side_dist.x < side_dist.y)
+		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
+		{
+			env()->side = 0;
+			if (portal == 0)
+				hit = 1;
+			if (portal == 3)
+			{
+				trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
+				env()->wall.x = env()->blue.x;
+				env()->wall.y = env()->blue.y - 1;
+			}
+			else if (portal == 4)
+			{
+				trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
+				env()->wall.x = env()->red.x;
+				env()->wall.y = env()->red.y + 1;
+			}
+		}
+		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
+		{
+			env()->side = 1;
+			if (portal == 0)
+				hit = 1;
+			if (portal == 3)
+			{
+				trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
+				env()->wall.x = env()->blue.x;
+				env()->wall.y = env()->blue.y - 1;
+			}
+			else if (portal == 4)
+			{
+				trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
+				env()->wall.x = env()->red.x;
+				env()->wall.y = env()->red.y + 1;
+			}
+		}
+		else if (side_dist.x < side_dist.y)
 		{
 			side_dist.x += delta_dist.x;
 			env()->wall.x += step.x;
@@ -35,28 +86,14 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 			env()->wall.y += step.y;
 			env()->side = 1;
 		}
-		if (env()->map[env()->wall.x][env()->wall.y] == 3)
-		{
-			trace_portail(x, (env()->side == 0) ? side_dist.x : side_dist.y, 0xFF8C00);
-			env()->wall.x = env()->blue.x;
-			env()->wall.y = env()->blue.y - 1;
-		}
-		else if (env()->map[env()->wall.x][env()->wall.y] == 4)
-		{
-			trace_portail(x, (env()->side == 0) ? side_dist.x : side_dist.y, 0x00BFFF);
-			env()->wall.x = env()->red.x;
-			env()->wall.y = env()->red.y + 1;
-		}
-		else if (env()->map[env()->wall.x][env()->wall.y] == 1)
-			hit = 1;
 	}
 	(void)ray_dir;
-	return (env()->side == 0) ? side_dist.x : side_dist.y;
+	return (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj;
 	/*
-	return (env()->side == 0) ? ((env()->wall.x - cam()->pos.x + (1 - step.x) /
-				2) / ray_dir.x) : ((env()->wall.y - cam()->pos.y + (1 - step.y)
-					/ 2) / ray_dir.y);
-					*/
+	   return (env()->side == 0) ? ((env()->wall.x - cam()->pos.x + (1 - step.x) /
+	   2) / ray_dir.x) : ((env()->wall.y - cam()->pos.y + (1 - step.y)
+	   / 2) / ray_dir.y);
+	   */
 }
 
 void	ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
