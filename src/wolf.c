@@ -3,50 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/17 16:14:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 19:16:31 by vcombey          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wolf.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 16:14:29 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 12:50:00 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "math.h"
+#include "libft.h"
 #include <stdio.h>
+
+int		good_side_portal(t_int_pos *step, int side_color)
+{
+	if (env()->side == 0 && ft_abs(side_color) == 1 && side_color == step->x)
+		return (1);
+	else if (env()->side == 1 && ft_abs(side_color) == 2  && side_color == step->y)
+		return (1);
+	return (0);
+}
 
 int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_dist)
 {
-	//printf("wall.x-> %d\n", env()->wall.x);
-	if (portal == 3)
+	if (portal == 3 && good_side_portal(step, env()->sidered))
 	{
 		trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
-		env()->wall.x = env()->blue.x + 1;
-		env()->wall.y = env()->blue.y;
-		step->x *= -1;
+		if (ft_abs(env()->sideblue) == 1)
+			env()->wall.x = env()->blue.x - env()->sideblue;
+		else
+			env()->wall.y = env()->blue.y - env()->sideblue / 2;
+		if (env()->sideblue == env()->sidered)
+		{
+			if (env()->side == 0)
+				step->x *= -1;
+			else
+				step->y *= -1;
+		}
+		return (0);
 	}
-	else if (portal == 4)
+	else if (portal == 4 && good_side_portal(step, env()->sideblue))
 	{
 		trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
-		env()->wall.x = env()->red.x + 1;
-		env()->wall.y = env()->red.y;
-		step->x *= -1;
+		if (env()->sidered == 1 || env()->sidered == -1)
+			env()->wall.x = env()->red.x - env()->sidered;
+		else
+			env()->wall.y = env()->red.y - env()->sidered / 2;
+		if (env()->sideblue == env()->sidered)
+		{
+			if (env()->side == 0)
+				step->x *= -1;
+			else
+				step->y *= -1;
+		}
+		return (0);
 	}
-	//printf("wall.x-> %d", env()->wall.x);
-	if (portal == 1)
-		return (1);
-	return (0);
+	return (1);
 }
 
 double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
@@ -85,7 +97,6 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 			env()->side = 1;
 		}
 	}
-	(void)ray_dir;
 	return (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj;
 	/*
 	   return (env()->side == 0) ? ((env()->wall.x - cam()->pos.x + (1 - step.x) /

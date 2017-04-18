@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/17 19:09:28 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 11:10:31 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			init_env(char *file)
 	env()->red.y = 2;
 	env()->blue.x = 0;
 	env()->blue.y = 4;
-	env()->sideblue = 'L';
-	env()->sidered = 'L';
+	env()->sideblue = -1;
+	env()->sidered = -1;
 	return (0);
 }

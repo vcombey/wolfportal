@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/02/22 16:48:13 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/18 11:11:01 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC =	main.c			\
 		wolf.c			\
 		trace.c			\
 		key_event.c		\
-		floor_casting.c
+		floor_casting.c \
+		portal_gun.c	\
 
 INCLUDE = include/
 

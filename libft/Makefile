@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 16:54:16 by vcombey           #+#    #+#              #
-#    Updated: 2017/01/05 19:29:50 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/18 12:43:59 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ INCLUDE = libft.h
 NAME = libft.a
 
 SRC = ft_dtoa.c \
+	ft_abs.c	\
 	ft_mem{alloc,ccpy,chr,cmp,cpy,del,move,set}.c \
 	ft_bzero.c \
 	ft_strlcat.c \

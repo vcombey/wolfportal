@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:04 by vcombey           #+#    #+#             */
-/*   Updated: 2017/01/04 19:30:28 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 11:19:14 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,16 @@ unsigned int		ft_pixelget(int x, int y)
 	if (dest < 0)
 		return (0);
 	return (*(unsigned int *)(&texture()->ptr[dest]));
+}
+
+unsigned int		ft_pixelget_img(int x, int y)
+{
+	int				dest;
+
+	if (y < 0 || x < 0)
+		return (0);
+	dest = y * env()->size_line + x * (env()->bpp / 8);
+	if (dest < 0)
+		return (0);
+	return (*(unsigned int *)(&env()->ptr[dest]));
 }

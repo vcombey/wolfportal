@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/17 17:33:24 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 12:36:39 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	ft_trace_textur(int x, double dist_wall,
 				100 / (draw_end - draw_start));
 		if (env()->side == 1)
 			color = (color >> 1) & 8355711;
-		ft_pixelput(x, y, color);
+		if (ft_pixelget_img(x, y) == 0)
+			ft_pixelput(x, y, color);
 		y++;
 	}
 }
