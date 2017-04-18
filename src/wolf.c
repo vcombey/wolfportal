@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 12:50:00 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 18:13:27 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,58 @@ int		good_side_portal(t_int_pos *step, int side_color)
 	return (0);
 }
 
-int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_dist)
+int		transform_sidecolor(int side_color)
+{
+	if (side_color < 0)
+		return ((env()->sidered == -1) ? 3 : 4);
+	return side_color;
+}
+
+void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *delta_dist)
+{
+	int		a;
+	int		b;
+	int		new_stepx;
+	double	tmp;
+
+	if (env()->sideblue == env()->sidered)
+	{
+		if (env()->side == 0)
+			step->x *= -1;
+		else
+			step->y *= -1;
+	}
+	else if (ft_abs(env()->sideblue) != ft_abs(env()->sidered))
+	{
+		tmp = delta_dist->x;
+		delta_dist->x = delta_dist->y;
+		delta_dist->y = tmp;
+		if (portal == 3)
+		{
+			a = transform_sidecolor(env()->sidered);
+			b = transform_sidecolor(env()->sideblue);
+		}
+		else
+		{
+			b = transform_sidecolor(env()->sidered);
+			a = transform_sidecolor(env()->sideblue);
+		}
+		if (a < b || (a == 4 && b == 1))
+		{
+			new_stepx = step->y;
+			step->y = -step->x;
+			step->x = new_stepx;
+		}
+		else if (a > b || (a == 1 && b == 4))
+		{
+			new_stepx = -step->y;
+			step->y = step->x;
+			step->x = new_stepx;
+		}
+	}
+}
+
+int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_dist, t_double_pos *delta_dist)
 {
 	if (portal == 3 && good_side_portal(step, env()->sidered))
 	{
@@ -33,13 +84,7 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_d
 			env()->wall.x = env()->blue.x - env()->sideblue;
 		else
 			env()->wall.y = env()->blue.y - env()->sideblue / 2;
-		if (env()->sideblue == env()->sidered)
-		{
-			if (env()->side == 0)
-				step->x *= -1;
-			else
-				step->y *= -1;
-		}
+		transform_direction_ray_portal(portal, step, delta_dist);
 		return (0);
 	}
 	else if (portal == 4 && good_side_portal(step, env()->sideblue))
@@ -49,13 +94,7 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_d
 			env()->wall.x = env()->red.x - env()->sidered;
 		else
 			env()->wall.y = env()->red.y - env()->sidered / 2;
-		if (env()->sideblue == env()->sidered)
-		{
-			if (env()->side == 0)
-				step->x *= -1;
-			else
-				step->y *= -1;
-		}
+		transform_direction_ray_portal(portal, step, delta_dist);
 		return (0);
 	}
 	return (1);
@@ -77,12 +116,12 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			hit = ft_hit(x, proj, portal, &step, side_dist);
+			hit = ft_hit(x, proj, portal, &step, side_dist, &delta_dist);
 		}
 		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
 		{
 			env()->side = 1;
-			hit = ft_hit(x, proj, portal, &step, side_dist);
+			hit = ft_hit(x, proj, portal, &step, side_dist, &delta_dist);
 		}
 		else if (side_dist.x < side_dist.y)
 		{

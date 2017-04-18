@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/18 11:11:01 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/18 17:16:12 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ INCLUDE = include/
 
 OBJS = $(addprefix objs/, $(SRC:.c=.o))
 
-CFLAGS += -Wall -g -Wextra -Werror -I./libft -I. -I./libft/includes
+CFLAGS += -Wall -g -o2 -flto -Wextra -Werror -I./libft -I. -I./libft/includes
 
 all: $(NAME)
 
