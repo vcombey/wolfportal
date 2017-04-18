@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 10:57:23 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 21:14:59 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ static void	ft_turn(void)
 	if (key()->left)
 	{
 		old_dirx = cam()->dir.x;
-		cam()->dir.x = cam()->dir.x * cos(0.1) - cam()->dir.y * sin(0.1);
-		cam()->dir.y = old_dirx * sin(0.1) + cam()->dir.y * cos(0.1);
+		cam()->dir.x = cam()->dir.x * cos(0.04) - cam()->dir.y * sin(0.04);
+		cam()->dir.y = old_dirx * sin(0.04) + cam()->dir.y * cos(0.04);
 		old_planex = cam()->plane.x;
-		cam()->plane.x = cam()->plane.x * cos(0.1) - cam()->plane.y * sin(0.1);
-		cam()->plane.y = old_planex * sin(0.1) + cam()->plane.y * cos(0.1);
+		cam()->plane.x = cam()->plane.x * cos(0.04) - cam()->plane.y * sin(0.04);
+		cam()->plane.y = old_planex * sin(0.04) + cam()->plane.y * cos(0.04);
 	}
 	if (key()->right)
 	{
 		old_dirx = cam()->dir.x;
-		cam()->dir.x = cam()->dir.x * cos(-0.1) - cam()->dir.y * sin(-0.1);
-		cam()->dir.y = old_dirx * sin(-0.1) + cam()->dir.y * cos(-0.1);
+		cam()->dir.x = cam()->dir.x * cos(-0.04) - cam()->dir.y * sin(-0.04);
+		cam()->dir.y = old_dirx * sin(-0.04) + cam()->dir.y * cos(-0.04);
 		old_planex = cam()->plane.x;
-		cam()->plane.x = cam()->plane.x * cos(-0.1)
-			- cam()->plane.y * sin(-0.1);
-		cam()->plane.y = old_planex * sin(-0.1) + cam()->plane.y * cos(-0.1);
+		cam()->plane.x = cam()->plane.x * cos(-0.04)
+			- cam()->plane.y * sin(-0.04);
+		cam()->plane.y = old_planex * sin(-0.04) + cam()->plane.y * cos(-0.04);
 	}
 }
 
@@ -53,31 +53,31 @@ int		ft_move(void *param)
 	(void)param;
 	if (key()->up)
 	{
-		if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.2)] == 3)
+		if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 3)
 		{
 			cam()->pos.x = (double)env()->blue.x;
 			cam()->pos.y = (double)env()->blue.y - 0.5;
 		}
-		else if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.2)] == 4)
+		else if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 4)
 		{
 			cam()->pos.x = (double)env()->red.x;
 			cam()->pos.y = (double)env()->red.y + 0.5;
 		}
-		if (env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.2)]
+		if (env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.05)]
 				[(int)cam()->pos.y] == 0)
-			cam()->pos.x += cam()->dir.x * 0.2;
+			cam()->pos.x += cam()->dir.x * 0.05;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y + cam()->dir.y * 0.2)] == 0)
-			cam()->pos.y += cam()->dir.y * 0.2;
+				[(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 0)
+			cam()->pos.y += cam()->dir.y * 0.05;
 	}
 	if (key()->down)
 	{
-		if (env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.2)]
+		if (env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.05)]
 				[(int)cam()->pos.y] == 0)
-			cam()->pos.x -= cam()->dir.x * 0.2;
+			cam()->pos.x -= cam()->dir.x * 0.05;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y - cam()->dir.y * 0.2)] == 0)
-			cam()->pos.y -= cam()->dir.y * 0.2;
+				[(int)(cam()->pos.y - cam()->dir.y * 0.05)] == 0)
+			cam()->pos.y -= cam()->dir.y * 0.05;
 	}
 	ft_turn();
 	erase_img();
@@ -106,7 +106,6 @@ int		ft_key_pressed(int keycode, void *param)
 		key()->left = 1;
 	if (keycode == KEY_ESCAPE)
 		exit(0);
-	printf("%d", keycode);
 	return (0);
 }
 
@@ -115,16 +114,24 @@ int		ft_key_release(int keycode, void *param)
 {
 	(void)param;
 	if (keycode == KEY_UP)
+	{
 		key()->up = 0;
+	}
 	if (keycode == KEY_DOWN)
+	{
 		key()->down = 0;
+		portal_gun_shoot(keycode);
+	}
 	if (keycode == KEY_RIGHT)
 		key()->right = 0;
 	if (keycode == KEY_LEFT)
 		key()->left = 0;
 	if (keycode == KEY_ESCAPE)
 		exit(0);
-	if (keycode == KEY_Z)
-		portal_gun_shoot();
+	if (keycode == KEY_Z || keycode == KEY_S)
+	{
+		portal_gun_shoot(keycode);
+		printf("lala\n");
+	}
 	return (0);
 }

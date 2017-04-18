@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 18:13:27 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 21:58:44 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,24 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_d
 	if (portal == 3 && good_side_portal(step, env()->sidered))
 	{
 		trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
+		env()->wall.x = env()->blue.x;
+		env()->wall.y = env()->blue.y;
 		if (ft_abs(env()->sideblue) == 1)
-			env()->wall.x = env()->blue.x - env()->sideblue;
+			env()->wall.x -= env()->sideblue;
 		else
-			env()->wall.y = env()->blue.y - env()->sideblue / 2;
+			env()->wall.y -= env()->sideblue / 2;
 		transform_direction_ray_portal(portal, step, delta_dist);
 		return (0);
 	}
 	else if (portal == 4 && good_side_portal(step, env()->sideblue))
 	{
 		trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
+		env()->wall.x = env()->red.x;
+		env()->wall.y = env()->red.y;
 		if (env()->sidered == 1 || env()->sidered == -1)
-			env()->wall.x = env()->red.x - env()->sidered;
+			env()->wall.x -= env()->sidered;
 		else
-			env()->wall.y = env()->red.y - env()->sidered / 2;
+			env()->wall.y -= env()->sidered / 2;
 		transform_direction_ray_portal(portal, step, delta_dist);
 		return (0);
 	}

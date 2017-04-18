@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 11:17:55 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/18 19:14:20 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct		s_env
 	t_int_pos		blue;
 	int				sidered;
 	int				sideblue;
-	char			portal_color;
 }					t_env;
 
 typedef struct		s_key
@@ -135,7 +134,7 @@ t_key				*key(void);
 int					ft_key_release(int keycode, void *param);
 void				trace_portail(int x, double dist_wall, int color);
 unsigned int		ft_pixelget_img(int x, int y);
-void				portal_gun_shoot(void);
+void				portal_gun_shoot(int keycode);
 void				ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
 		t_double_pos *delta_dist, t_int_pos *step);
 
