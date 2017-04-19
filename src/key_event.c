@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 21:14:59 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 10:54:11 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,12 @@ void	erase_img()
 int		ft_move(void *param)
 {
 	(void)param;
+	int		portal;
+
 	if (key()->up)
 	{
-		if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 3)
-		{
-			cam()->pos.x = (double)env()->blue.x;
-			cam()->pos.y = (double)env()->blue.y - 0.5;
-		}
-		else if (env()->map[(int)(cam()->pos.x)][(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 4)
-		{
-			cam()->pos.x = (double)env()->red.x;
-			cam()->pos.y = (double)env()->red.y + 0.5;
-		}
+		if ((portal = env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.5)][(int)(cam()->pos.y + cam()->dir.y * 0.5)]) >= 3)
+			teleport_pos(portal);
 		if (env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.05)]
 				[(int)cam()->pos.y] == 0)
 			cam()->pos.x += cam()->dir.x * 0.05;

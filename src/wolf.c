@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 21:58:44 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 10:47:35 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		good_side_portal(t_int_pos *step, int side_color)
 int		transform_sidecolor(int side_color)
 {
 	if (side_color < 0)
-		return ((env()->sidered == -1) ? 3 : 4);
+		return ((side_color == -1) ? 3 : 4);
 	return side_color;
 }
 

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 19:14:20 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 10:49:30 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,7 @@ unsigned int		ft_pixelget_img(int x, int y);
 void				portal_gun_shoot(int keycode);
 void				ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
 		t_double_pos *delta_dist, t_int_pos *step);
+void				teleport_pos(int portal);
+int					transform_sidecolor(int side_color);
 
 #endif
