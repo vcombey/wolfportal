@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 08:59:29 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/19 13:54:07 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 14:29:48 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	change_portail(int keycode) {
 		else if (env()->side == 0 && cam()->dir.x < 0)
 			env()->sidered = -1;
 		else if (env()->side == 1 && cam()->dir.y >= 0)
-			env()->sidered = -2;
-		else if (env()->side == 1 && cam()->dir.y < 0)
 			env()->sidered = 2;
+		else if (env()->side == 1 && cam()->dir.y < 0)
+			env()->sidered = -2;
 	}
 	else if (keycode == KEY_S)
 	{
@@ -41,9 +41,9 @@ void	change_portail(int keycode) {
 		else if (env()->side == 0 && cam()->dir.x < 0)
 			env()->sideblue = -1;
 		else if (env()->side == 1 && cam()->dir.y >= 0)
-			env()->sideblue = -2;
-		else if (env()->side == 1 && cam()->dir.y < 0)
 			env()->sideblue = 2;
+		else if (env()->side == 1 && cam()->dir.y < 0)
+			env()->sideblue = -2;
 	}
 }
 
