@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/19 18:05:47 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 21:21:23 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *d
 	int		a;
 	int		b;
 	int		new_stepx;
-	//double	tmp;
+	double	tmp;
 
 	(void)delta_dist;
 	if (env()->sideblue == env()->sidered)
 	{
-		if (env()->side == 0)
-			step->x *= -1;
-		else
-			step->y *= -1;
+		step->x *= -1;
+		step->y *= -1;
 	}
 	else if (ft_abs(env()->sideblue) != ft_abs(env()->sidered))
 	{
