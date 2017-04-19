@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/19 10:47:35 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/19 12:28:00 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		good_side_portal(t_int_pos *step, int side_color)
 {
 	if (env()->side == 0 && ft_abs(side_color) == 1 && side_color == step->x)
 		return (1);
-	else if (env()->side == 1 && ft_abs(side_color) == 2  && side_color == step->y)
+	else if (env()->side == 1 && ft_abs(side_color) == 2  && side_color == 2 * step->y)
 		return (1);
 	return (0);
 }
@@ -94,7 +94,7 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_d
 		trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
 		env()->wall.x = env()->red.x;
 		env()->wall.y = env()->red.y;
-		if (env()->sidered == 1 || env()->sidered == -1)
+		if (ft_abs(env()->sidered) == 1)
 			env()->wall.x -= env()->sidered;
 		else
 			env()->wall.y -= env()->sidered / 2;
