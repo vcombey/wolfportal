@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/19 21:15:19 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 10:09:16 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,19 @@ void	teleport_rot(int portal)
 			tmp = -cam()->dir.y;
 			cam()->dir.y = cam()->dir.x;
 			cam()->dir.x = tmp;
+			tmp = -cam()->plane.y;
+			cam()->dir.y = cam()->plane.x;
+			cam()->dir.x = tmp;
+
 		}
 		else if (a > b || (a == 1 && b == 4))
 		{
 			tmp = cam()->dir.y;
 			cam()->dir.y = -cam()->dir.x;
 			cam()->dir.x = tmp;
+			tmp = cam()->plane.y;
+			cam()->plane.y = -cam()->plane.x;
+			cam()->plane.x = tmp;
 		}
 	}
 }
@@ -68,7 +75,7 @@ void	teleport_pos(int portal)
 		if (ft_abs(env()->sideblue) == 1)
 			cam()->pos.x -= (double)env()->sideblue;
 		else
-			cam()->pos.y -= (double)env()->sideblue / 2;
+			cam()->pos.y -= ((double)env()->sideblue / 2);
 		teleport_rot(portal);
 		cam()->pos.x += cam()->dir.x * 0.1;
 		cam()->pos.y += cam()->dir.y * 0.1;
@@ -80,7 +87,7 @@ void	teleport_pos(int portal)
 		if (ft_abs(env()->sidered) == 1)
 			cam()->pos.x -= (double)env()->sidered;
 		else
-			cam()->pos.y -= (double)env()->sidered / 2;
+			cam()->pos.y -= ((double)env()->sidered / 2);
 		teleport_rot(portal);
 		cam()->pos.x += cam()->dir.x * 0.1;
 		cam()->pos.y += cam()->dir.y * 0.1;
