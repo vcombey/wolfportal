@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/19 14:14:39 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 17:51:29 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int			init_env(char *file)
 		return (ft_retmsg("mlx problem", 2));
 	env()->ptr = mlx_get_data_addr(env()->img, &env()->bpp, &env()->size_line,
 	&env()->endian);
-	env()->map[0][2] = 3;
+	env()->map[4][6] = 3;
 	env()->map[0][4] = 4;
-	env()->red.x = 0;
-	env()->red.y = 2;
+	env()->red.x = 4;
+	env()->red.y = 6;
 	env()->blue.x = 0;
 	env()->blue.y = 4;
+	env()->sidered = 2;
 	env()->sideblue = -1;
-	env()->sidered = -1;
 	return (0);
 }

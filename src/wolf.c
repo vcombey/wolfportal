@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 14:23:29 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 17:53:59 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *d
 		}
 		if (a < b || (a == 4 && b == 1))
 		{
-			new_stepx = -step->y;
-			step->y = step->x;
+			new_stepx = step->y;
+			step->y = -step->x;
 			step->x = new_stepx;
 		}
 		else if (a > b || (a == 1 && b == 4))
 		{
-			new_stepx = step->y;
-			step->y = -step->x;
+			new_stepx = -step->y;
+			step->y = step->x;
 			step->x = new_stepx;
 		}
 		tmp = side_dist->x;
@@ -107,9 +107,9 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_
 		transform_direction_ray_portal(portal, step, delta_dist, side_dist);
 		return (0);
 	}
-	else if (portal == 1)
-		return (1);
-	return (0);
+	else if (portal == 2)
+		return (0);
+	return (1);
 }
 
 
@@ -148,9 +148,9 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 			env()->wall.y += step.y;
 			env()->side = 1;
 		}
-		printf("wallx->%d, wally->%d\n", env()->wall.x, env()->wall.y);
-		printf("side_distx->%f, side_disty->%f\n", side_dist.x, side_dist.y);
-		printf("stepx->%d, stepy->%d\n", step.x, step.y);
+		//printf("wallx->%d, wally->%d\n", env()->wall.x, env()->wall.y);
+		//printf("side_distx->%f, side_disty->%f\n", side_dist.x, side_dist.y);
+		//printf("stepx->%d, stepy->%d\n", step.x, step.y);
 		//usleep(1);
 	}
 	return (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj;

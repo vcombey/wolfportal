@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/19 15:58:07 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 15:41:28 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,6 @@ void				ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
 		t_double_pos *delta_dist, t_int_pos *step);
 void				teleport_pos(int portal);
 int					transform_sidecolor(int side_color);
+void				cross();
 
 #endif

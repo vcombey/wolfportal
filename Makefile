@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/19 10:31:41 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/20 15:40:45 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC =	main.c			\
 		floor_casting.c \
 		portal_gun.c	\
 		teleportation.c	\
+		cross.c			\
 
 INCLUDE = include/
 

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 10:09:16 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 17:58:02 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,21 @@ void	teleport_rot(int portal)
 		}
 		if (a < b || (a == 4 && b == 1))
 		{
-			tmp = -cam()->dir.y;
-			cam()->dir.y = cam()->dir.x;
-			cam()->dir.x = tmp;
-			tmp = -cam()->plane.y;
-			cam()->dir.y = cam()->plane.x;
-			cam()->dir.x = tmp;
-
-		}
-		else if (a > b || (a == 1 && b == 4))
-		{
 			tmp = cam()->dir.y;
 			cam()->dir.y = -cam()->dir.x;
 			cam()->dir.x = tmp;
 			tmp = cam()->plane.y;
 			cam()->plane.y = -cam()->plane.x;
 			cam()->plane.x = tmp;
+		}
+		else if (a > b || (a == 1 && b == 4))
+		{
+			tmp = -cam()->dir.y;
+			cam()->dir.y = cam()->dir.x;
+			cam()->dir.x = tmp;
+			tmp = -cam()->plane.y;
+			cam()->dir.y = cam()->plane.x;
+			cam()->dir.x = tmp;
 		}
 	}
 }
