@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 10:09:18 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/20 14:23:29 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,18 @@ int		transform_sidecolor(int side_color)
 	return side_color;
 }
 
-void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *delta_dist)
+double	ft_min_double(double a, double b)
+{
+	return (a < b) ? a : b;
+}
+
+void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *delta_dist, t_double_pos *side_dist)
 {
 	int		a;
 	int		b;
 	int		new_stepx;
 	double	tmp;
 
-	(void)delta_dist;
 	if (env()->sideblue == env()->sidered)
 	{
 		step->x *= -1;
@@ -71,37 +75,43 @@ void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *d
 			step->y = -step->x;
 			step->x = new_stepx;
 		}
+		tmp = side_dist->x;
+		side_dist->x = side_dist->y;
+		side_dist->y = tmp;
 	}
 }
 
-int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos side_dist, t_double_pos *delta_dist)
+int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_dist, t_double_pos *delta_dist)
 {
 	if (portal == 3 && good_side_portal(step, env()->sidered))
 	{
-		trace_portail(x, (env()->side == 0) ? side_dist.x / proj: side_dist.y / proj, 0xFF8C00);
+		trace_portail(x, (env()->side == 0) ? side_dist->x / proj: side_dist->y / proj, 0xFF8C00);
 		env()->wall.x = env()->blue.x;
 		env()->wall.y = env()->blue.y;
 		if (ft_abs(env()->sideblue) == 1)
 			env()->wall.x -= env()->sideblue;
 		else
 			env()->wall.y -= (env()->sideblue / 2);
-		transform_direction_ray_portal(portal, step, delta_dist);
+		transform_direction_ray_portal(portal, step, delta_dist, side_dist);
 		return (0);
 	}
 	else if (portal == 4 && good_side_portal(step, env()->sideblue))
 	{
-		trace_portail(x, (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj, 0x00BFFF);
+		trace_portail(x, (env()->side == 0) ? side_dist->x / proj : side_dist->y / proj, 0x00BFFF);
 		env()->wall.x = env()->red.x;
 		env()->wall.y = env()->red.y;
 		if (ft_abs(env()->sidered) == 1)
 			env()->wall.x -= env()->sidered;
 		else
 			env()->wall.y -= (env()->sidered / 2);
-		transform_direction_ray_portal(portal, step, delta_dist);
+		transform_direction_ray_portal(portal, step, delta_dist, side_dist);
 		return (0);
 	}
-	return (1);
+	else if (portal == 1)
+		return (1);
+	return (0);
 }
+
 
 double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		t_double_pos ray_dir, int x)
@@ -119,14 +129,14 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			hit = ft_hit(x, proj, portal, &step, side_dist, &delta_dist);
+			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist);
 		}
 		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
 		{
 			env()->side = 1;
-			hit = ft_hit(x, proj, portal, &step, side_dist, &delta_dist);
+			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist);
 		}
-		else if (side_dist.x < side_dist.y)
+		else if (side_dist.x <= side_dist.y)
 		{
 			side_dist.x += delta_dist.x;
 			env()->wall.x += step.x;
@@ -138,6 +148,10 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 			env()->wall.y += step.y;
 			env()->side = 1;
 		}
+		printf("wallx->%d, wally->%d\n", env()->wall.x, env()->wall.y);
+		printf("side_distx->%f, side_disty->%f\n", side_dist.x, side_dist.y);
+		printf("stepx->%d, stepy->%d\n", step.x, step.y);
+		//usleep(1);
 	}
 	return (env()->side == 0) ? side_dist.x / proj : side_dist.y / proj;
 	/*
@@ -199,6 +213,7 @@ void	ft_wolf(void)
 	while (x < SCREEN_WIDTH)
 	{
 		dist_wall = ft_calc_dist(x);
+		printf("dist_wall->%f\n", dist_wall);
 		ft_trace_colone(x, dist_wall);
 		x++;
 	}
