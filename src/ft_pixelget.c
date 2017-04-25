@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:04 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 11:19:14 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/21 11:14:57 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ unsigned int		ft_pixelget(int x, int y)
 	if (y < 0 || x < 0)
 		return (0);
 	dest = y * texture()->size_line + x * (texture()->bpp / 8);
-	if ((100 * 100 * (texture()->bpp / 8)) <= dest)
+	if ((WALL_p_HEIGHT * WALL_p_WIDTH * (texture()->bpp / 8)) <= dest)
 		return (0);
 	if (dest < 0)
 		return (0);

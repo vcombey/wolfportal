@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 17:58:02 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/21 10:55:00 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	teleport_rot(int portal)
 			cam()->dir.y = cam()->dir.x;
 			cam()->dir.x = tmp;
 			tmp = -cam()->plane.y;
-			cam()->dir.y = cam()->plane.x;
-			cam()->dir.x = tmp;
+			cam()->plane.y = cam()->plane.x;
+			cam()->plane.x = tmp;
 		}
 	}
 }

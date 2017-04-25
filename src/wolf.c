@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 17:53:59 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/25 13:51:31 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double	ft_min_double(double a, double b)
 	return (a < b) ? a : b;
 }
 
-void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *delta_dist, t_double_pos *side_dist)
+void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *delta_dist, t_double_pos *side_dist, t_double_pos *ray_dir)
 {
 	int		a;
 	int		b;
@@ -68,12 +68,18 @@ void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *d
 			new_stepx = step->y;
 			step->y = -step->x;
 			step->x = new_stepx;
+			tmp = ray_dir->y;
+			ray_dir->y = -ray_dir->x;
+			ray_dir->x = tmp;
 		}
 		else if (a > b || (a == 1 && b == 4))
 		{
 			new_stepx = -step->y;
 			step->y = step->x;
 			step->x = new_stepx;
+			tmp = -ray_dir->y;
+			ray_dir->y = ray_dir->x;
+			ray_dir->x = tmp;
 		}
 		tmp = side_dist->x;
 		side_dist->x = side_dist->y;
@@ -81,7 +87,7 @@ void	transform_direction_ray_portal(int portal, t_int_pos *step, t_double_pos *d
 	}
 }
 
-int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_dist, t_double_pos *delta_dist)
+int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_dist, t_double_pos *delta_dist, t_double_pos *ray_dir)
 {
 	if (portal == 3 && good_side_portal(step, env()->sidered))
 	{
@@ -92,7 +98,7 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_
 			env()->wall.x -= env()->sideblue;
 		else
 			env()->wall.y -= (env()->sideblue / 2);
-		transform_direction_ray_portal(portal, step, delta_dist, side_dist);
+		transform_direction_ray_portal(portal, step, delta_dist, side_dist, ray_dir);
 		return (0);
 	}
 	else if (portal == 4 && good_side_portal(step, env()->sideblue))
@@ -104,7 +110,7 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_
 			env()->wall.x -= env()->sidered;
 		else
 			env()->wall.y -= (env()->sidered / 2);
-		transform_direction_ray_portal(portal, step, delta_dist, side_dist);
+		transform_direction_ray_portal(portal, step, delta_dist, side_dist, ray_dir);
 		return (0);
 	}
 	else if (portal == 2)
@@ -114,14 +120,14 @@ int		ft_hit(int x, double proj, int portal, t_int_pos *step, t_double_pos *side_
 
 
 double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
-		t_double_pos ray_dir, int x)
+		t_double_pos *ray_dir, int x)
 {
 	int hit;
 	int	portal;
 	double proj;
 
 	hit = 0;
-	proj = sqrt(((ray_dir.y * ray_dir.y) + (ray_dir.x * ray_dir.x)));
+	proj = sqrt(((ray_dir->y * ray_dir->y) + (ray_dir->x * ray_dir->x)));
 	env()->wall.x = (int)cam()->pos.x;
 	env()->wall.y = (int)cam()->pos.y;
 	while (hit == 0)
@@ -129,12 +135,12 @@ double	ft_dda(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step,
 		if (side_dist.x < side_dist.y && ((portal = env()->map[env()->wall.x + step.x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist);
+			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist, ray_dir);
 		}
 		else if (side_dist.y < side_dist.x && ((portal = env()->map[env()->wall.x][env()->wall.y + step.y]) > 0))
 		{
 			env()->side = 1;
-			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist);
+			hit = ft_hit(x, proj, portal, &step, &side_dist, &delta_dist, ray_dir);
 		}
 		else if (side_dist.x <= side_dist.y)
 		{
@@ -186,7 +192,7 @@ void	ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
 	}
 }
 
-double	ft_calc_dist(int x)
+double	ft_calc_dist(int x, t_double_pos *ray_dir)
 {
 	double			range;
 	t_double_pos	delta_dist;
@@ -194,27 +200,30 @@ double	ft_calc_dist(int x)
 	t_double_pos	side_dist;
 
 	range = 2 * (double)x / (double)SCREEN_WIDTH - 1;
-	env()->ray_dir.x = cam()->dir.x + range * cam()->plane.x;
-	env()->ray_dir.y = cam()->dir.y + range * cam()->plane.y;
+	ray_dir->x = cam()->dir.x + range * cam()->plane.x;
+	ray_dir->y = cam()->dir.y + range * cam()->plane.y;
+	env()->ray_dir.x = ray_dir->x;
+	env()->ray_dir.y = ray_dir->y;
 	delta_dist.x = sqrt(1 + (env()->ray_dir.y * env()->ray_dir.y) /
 			(env()->ray_dir.x * env()->ray_dir.x));
 	delta_dist.y = sqrt(1 + (env()->ray_dir.x * env()->ray_dir.x) /
 			(env()->ray_dir.y * env()->ray_dir.y));
 	ft_init_dist(&env()->ray_dir, &side_dist, &delta_dist, &step);
-	return (ft_dda(side_dist, delta_dist, step, env()->ray_dir, x));
+	return (ft_dda(side_dist, delta_dist, step, ray_dir, x));
 }
 
 void	ft_wolf(void)
 {
 	int		x;
 	double	dist_wall;
+	t_double_pos	ray_dir;
 
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		dist_wall = ft_calc_dist(x);
-		printf("dist_wall->%f\n", dist_wall);
-		ft_trace_colone(x, dist_wall);
+		dist_wall = ft_calc_dist(x, &ray_dir);
+		//printf("dist_wall->%f\n", dist_wall);
+		ft_trace_colone(x, dist_wall, ray_dir);
 		x++;
 	}
 }

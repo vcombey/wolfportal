@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 15:41:28 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/25 13:49:01 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ typedef struct		s_texture
 	int				endian;
 }					t_texture;
 
+typedef struct		s_portal_gun
+{
+	void			*img;
+	char			*ptr;
+	int				width;
+	int				height;
+	int				bpp;
+	int				size_line;
+	int				endian;
+}					t_portal_gun;
+
 typedef struct		s_env
 {
 	void			*mlx;
@@ -81,6 +92,10 @@ typedef struct		s_key
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 800
+# define WALL_p_WIDTH 420
+# define WALL_p_HEIGHT 420
+# define PORTAL_GUN_WIDTH 561
+# define PORTAL_GUN_HEIGHT 347
 # define WALL_HEIGHT 120
 # define SIZE_BLOCK 64
 # define PI 3.14159265
@@ -114,7 +129,7 @@ typedef struct		s_key
 
 int					init_env(char *file);
 void				ft_parse_input(char *name);
-void				ft_trace_colone(int x, double dist_wall);
+void				ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir);
 void				ft_pixelput(int x, int y, int color);
 t_env				*env(void);
 int					ft_retmsg(char *message, int sortie);
@@ -140,5 +155,8 @@ void				ft_init_dist(t_double_pos *ray_dir, t_double_pos *side_dist,
 void				teleport_pos(int portal);
 int					transform_sidecolor(int side_color);
 void				cross();
+int					init_portal_gun(void);
+void				draw_portal_gun(void);
+t_portal_gun		*gun(void);
 
 #endif

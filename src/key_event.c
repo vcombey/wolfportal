@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 15:43:40 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/21 11:12:51 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		ft_move(void *param)
 	erase_img();
 	ft_wolf();
 	cross();
+	draw_portal_gun();
 	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);
 	return (0);
 }

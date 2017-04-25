@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/20 17:51:29 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/21 11:19:44 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,30 @@ t_texture	*texture(void)
 	return (&t);
 }
 
+t_portal_gun	*gun(void)
+{
+	static t_portal_gun	g;
+
+	return (&g);
+}
+
 int			init_texture(void)
 {
-	if (!(texture()->img = mlx_xpm_file_to_image(env()->mlx, "ol.xpm",
+	if (!(texture()->img = mlx_xpm_file_to_image(env()->mlx, "mur_portal.xpm",
 	&texture()->width, &texture()->height)))
 		return (ft_retmsg("cannot load image ol.xpm :/", 2));
 	texture()->ptr = mlx_get_data_addr(texture()->img, &texture()->bpp,
 	&texture()->size_line, &texture()->endian);
+	return (0);
+}
+
+int			init_portal_gun(void)
+{
+	if (!(gun()->img = mlx_xpm_file_to_image(env()->mlx, "portal_gun.xpm",
+	&gun()->width, &gun()->height)))
+		return (ft_retmsg("cannot load image ol.xpm :/", 2));
+	gun()->ptr = mlx_get_data_addr(gun()->img, &gun()->bpp,
+	&gun()->size_line, &gun()->endian);
 	return (0);
 }
 

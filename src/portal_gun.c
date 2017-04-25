@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 08:59:29 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/20 17:44:05 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/21 11:19:02 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,40 @@ void	portal_gun_shoot(int keycode)
 			(cam()->dir.y * cam()->dir.y));
 	ft_init_dist(&cam()->dir, &side_dist, &delta_dist, &step);
 	return (ft_shoot(side_dist, delta_dist, step, keycode));
+}
+
+unsigned int		ft_pixelget_gun(int x, int y)
+{
+	int				dest;
+
+	if (y < 0 || x < 0)
+		return (0);
+	dest = y * gun()->size_line + x * (gun()->bpp / 8);
+	if ((PORTAL_GUN_HEIGHT * PORTAL_GUN_WIDTH * (gun()->bpp / 8)) <= dest)
+		return (0);
+	if (dest < 0)
+		return (0);
+	return (*(unsigned int *)(&gun()->ptr[dest]));
+}
+
+void	draw_portal_gun()
+{
+	int x;
+	int	y;
+	unsigned int	color;
+
+	x = 2 * SCREEN_HEIGHT / 3;
+	y = SCREEN_WIDTH / 2;
+	while (x < SCREEN_HEIGHT)
+	{
+		y = SCREEN_WIDTH / 2;
+		while (y < SCREEN_WIDTH)
+		{
+			if ((color = ft_pixelget_gun((y / SCREEN_WIDTH / 2 - 1) * PORTAL_GUN_WIDTH, ((x - (2 * SCREEN_HEIGHT / 3))/ SCREEN_HEIGHT / 3) * PORTAL_GUN_HEIGHT)) != 0xFFFFFF)
+				ft_pixelput(y, x, color);
+			y++;
+		}
+		x++;
+
+	}
 }
