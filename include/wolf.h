@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:23:27 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 21:42:55 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct		s_key
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 800
-# define WALL_p_WIDTH 420
-# define WALL_p_HEIGHT 420
+# define WALL_P_WIDTH 420
+# define WALL_P_HEIGHT 420
 # define PORTAL_GUN_WIDTH 561
 # define PORTAL_GUN_HEIGHT 347
 # define WALL_HEIGHT 250
@@ -127,7 +127,8 @@ typedef struct		s_key
 
 int					init_env(char *file);
 void				ft_parse_input(char *name);
-void				ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir);
+void				ft_trace_colone(int x, double dist_wall,
+		t_double_pos ray_dir);
 void				ft_pixelput(int x, int y, int color);
 t_env				*env(void);
 int					ft_retmsg(char *message, int sortie);
@@ -148,7 +149,6 @@ int					init_portal_gun_texture(void);
 int					init_wall_texture(void);
 
 unsigned int		ft_pixelget(int x, int y, t_texture t);
-int					ft_move(void *param);
 void				floor_casting(int x, double dist_wall, int y);
 int					ft_key_pressed(int keycode, void *param);
 t_key				*key(void);
@@ -175,4 +175,5 @@ void				transform_direction_ray_portal(int portal, t_dda dda);
 
 void				ft_init_dist(t_dda dda);
 
+int					recalc_img(void *param);
 #endif

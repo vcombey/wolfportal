@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 15:32:25 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/25 14:26:49 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 15:03:37 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@ void	draw_rect(int x1, int y1, int x2, int y2)
 	int j;
 
 	i = x1;
-	while (i  < x2)
+	while (i < x2)
 	{
 		j = y1;
 		while (j < y2)
 		{
-			ft_pixelput(j, i, 0xFFFFFF);	
+			ft_pixelput(j, i, 0xFFFFFF);
 			j++;
 		}
 		i++;
 	}
 }
 
-
-void	cross()
+void	cross(void)
 {
 	t_int_pos mid;
 

@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:52:50 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 22:21:18 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static void	ft_trace_textur(int x, double dist_wall,
 	else
 		wallx = cam()->pos.x + dist_wall * ray_dir.x;
 	wallx -= (int)wallx;
-	texx = (int)(wallx * (double)WALL_p_WIDTH);
+	texx = (int)(wallx * (double)WALL_P_WIDTH);
 	if (env()->side == 0 && ray_dir.x > 0)
-		texx = WALL_p_WIDTH - texx - 1;
+		texx = WALL_P_WIDTH - texx - 1;
 	if (env()->side == 1 && ray_dir.y < 0)
-		texx = WALL_p_WIDTH - texx - 1;
+		texx = WALL_P_WIDTH - texx - 1;
 	y = draw_start;
 	while (y < draw_end)
 	{
 		color = ft_pixelget(texx, (y - draw_start) *
-				WALL_p_HEIGHT / (draw_end - draw_start), *texture());
+				WALL_P_HEIGHT / (draw_end - draw_start), *texture());
 		if (env()->side == 1)
 			color = (color >> 1) & 8355711;
 		if (ft_pixelget_img(x, y) == 0x0)
@@ -61,6 +61,34 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	ft_trace_textur(x, dist_wall, draw_start, draw_end, ray_dir);
 }
 
+void	trace_portail_step_y(int portal, int draw_start, int draw_end, int x, int y, int texx)
+{
+	int		color;
+
+	if (portal == 3)
+	{
+		if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_blue())) == 0x00ff00)
+		{
+			color = ft_pixelget(texx, (y - draw_start) * WALL_P_HEIGHT / (draw_end - draw_start), *texture());
+			if (env()->side == 1)
+				color = (color >> 1) & 8355711;
+		}
+		if (ft_pixelget_img(x, y) == 0x0)
+			ft_pixelput(x, y, color);
+	}
+	else
+	{
+		if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_red())) == 0x00ff00)
+		{
+			color = ft_pixelget(texx, (y - draw_start) * WALL_P_HEIGHT  / (draw_end - draw_start), *texture());
+			if (env()->side == 1)
+				color = (color >> 1) & 8355711;
+		}
+		if (ft_pixelget_img(x, y) == 0x0)
+			ft_pixelput(x, y, color);
+	}
+}
+
 void	trace_portail(int x, double dist_wall, int portal)
 {
 	int		lineheight;
@@ -68,9 +96,7 @@ void	trace_portail(int x, double dist_wall, int portal)
 	int		draw_end;
 	double	wallx;
 	int		texx;
-	int		color;
 	int		y;
-
 
 	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
@@ -92,28 +118,7 @@ void	trace_portail(int x, double dist_wall, int portal)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		if (portal == 3)
-		{
-			if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_blue())) == 0x00ff00)
-			{
-				color = ft_pixelget(texx, (y - draw_start) * WALL_p_HEIGHT / (draw_end - draw_start), *texture());
-				if (env()->side == 1)
-					color = (color >> 1) & 8355711;
-			}
-			if (ft_pixelget_img(x, y) == 0x0)
-				ft_pixelput(x, y, color);
-		}
-		else
-		{
-			if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_red())) == 0x00ff00)
-			{
-				color = ft_pixelget(texx, (y - draw_start) * WALL_p_HEIGHT  / (draw_end - draw_start), *texture());
-				if (env()->side == 1)
-					color = (color >> 1) & 8355711;
-			}
-			if (ft_pixelget_img(x, y) == 0x0)
-				ft_pixelput(x, y, color);
-		}
+		trace_portail_step_y(portal, draw_start, draw_end, x, y, texx);
 		y++;
 	}
 }

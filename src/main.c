@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:38 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:41:58 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 21:35:08 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(int ac, char **av)
 	ft_wolf();
 	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);
 	mlx_put_image_to_window(env()->mlx, env()->win, texture()->img, 0, 0);
-	mlx_loop_hook(env()->mlx, ft_move, NULL);
+	mlx_loop_hook(env()->mlx, recalc_img, NULL);
 	mlx_loop(env()->mlx);
 	return (0);
 }

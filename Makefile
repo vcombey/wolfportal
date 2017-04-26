@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/26 15:00:07 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/26 22:07:06 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC =	main.c			\
 		hit.c			\
 		draw_portal_gun.c	\
 		struct.c		\
+		key_pressed.c	\
+		init_texture.c	\
 
 INCLUDE = -I ./libft -I ./include
 
@@ -66,6 +68,5 @@ dis:
 	@echo " \//  /\'    |(: (____/ //  \  |___  // ___)   __ \_ \\\\\\\ (| (___\ || "
 	@echo " /   /  \\\    | \        /  ( \_|:  \(:  (     (: \__) :\|:       :) "
 	@echo "|___/    \___|  \\\"_____/    \_______)\__/      \_______)(________/ "
-
-
+                                                                                                                            
 .PHONY: all clean fclean re
