@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/25 20:57:50 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:52:50 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 		draw_end = SCREEN_HEIGHT - 1;
 	p = draw_start;
 	ft_trace_textur(x, dist_wall, draw_start, draw_end, ray_dir);
-	//floor_casting(x, dist_wall, draw_end);
 }
 
 void	trace_portail(int x, double dist_wall, int portal)

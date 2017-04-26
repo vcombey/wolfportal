@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:26:52 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 12:13:47 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:54:42 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		good_side_portal(t_int_pos *step, int side_color)
 {
 	if (env()->side == 0 && ft_abs(side_color) == 1 && side_color == step->x)
 		return (1);
-	else if (env()->side == 1 && ft_abs(side_color) == 2 && side_color == 2 * step->y)
+	else if (env()->side == 1 && ft_abs(side_color) == 2 && side_color ==
+			2 * step->y)
 		return (1);
 	return (0);
 }
@@ -27,7 +28,7 @@ int		transform_sidecolor(int side_color)
 {
 	if (side_color < 0)
 		return ((side_color == -1) ? 3 : 4);
-	return side_color;
+	return (side_color);
 }
 
 double	ft_min_double(double a, double b)

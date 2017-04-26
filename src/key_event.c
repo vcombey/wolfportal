@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/25 20:56:22 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:40:26 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 #include <mlx.h>
 #include <stdio.h>
 #include "libft.h"
+
+void	recalc_img()
+{
+	ft_memset(env()->ptr, 0, (SCREEN_WIDTH * (SCREEN_HEIGHT)) * 4);
+	ft_wolf();
+	cross();
+	draw_portal_gun();
+	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);
+}
 
 static void	ft_turn(void)
 {
@@ -41,11 +50,7 @@ static void	ft_turn(void)
 			- cam()->plane.y * sin(-0.04);
 		cam()->plane.y = old_planex * sin(-0.04) + cam()->plane.y * cos(-0.04);
 	}
-}
-
-void	erase_img()
-{
-	ft_memset(env()->ptr, 0, (SCREEN_WIDTH * (SCREEN_HEIGHT)) * 4);
+	recalc_img();
 }
 
 int		ft_move(void *param)
@@ -74,11 +79,6 @@ int		ft_move(void *param)
 			cam()->pos.y -= cam()->dir.y * 0.05;
 	}
 	ft_turn();
-	erase_img();
-	ft_wolf();
-	cross();
-	draw_portal_gun();
-	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 14:03:14 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/25 20:52:31 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:57:52 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void			floor_casting(int x, double dist_wall, int y)
 		curr_floor.x = weight * wall_bottom.x + (1.0 - weight) * cam()->pos.x;
 		curr_floor.y = weight * wall_bottom.y + (1.0 - weight) * cam()->pos.y;
 		ft_pixelput(x, y, 0);
-		//ft_pixelput(x, y, ft_pixelget((int)(curr_floor.x * 100) % 100,
-		//(int)(curr_floor.y * 100) % 100));
+		ft_pixelput(x, y, ft_pixelget((int)(curr_floor.x * 100) % 100,
+		(int)(curr_floor.y * 100) % 100));
 		ft_pixelput(x, SCREEN_HEIGHT - y, 0);
-		//ft_pixelput(x, SCREEN_HEIGHT - y, ft_pixelget((int)(curr_floor.x * 100)
-		//% 100, (int)(curr_floor.y * 100) % 100));
+		ft_pixelput(x, SCREEN_HEIGHT - y, ft_pixelget((int)(curr_floor.x * 100)
+		% 100, (int)(curr_floor.y * 100) % 100));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:38 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 11:49:37 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:41:58 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(int ac, char **av)
 	init_portal_blue_texture();
 	init_portal_red_texture();
 	mlx_hook(env()->win, KEYPRESS, KEYPRESSMASK, &ft_key_pressed, NULL);
-	mlx_hook(env()->win, KEYRELEA, KEYRELEAMASK, &ft_key_release, NULL);	
+	mlx_hook(env()->win, KEYRELEA, KEYRELEAMASK, &ft_key_release, NULL);
 	mlx_hook(env()->win, 17, 1, &quit, NULL);
 	ft_wolf();
 	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);

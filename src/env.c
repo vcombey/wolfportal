@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/25 17:22:06 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:59:36 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,10 @@
 #include <unistd.h>
 #include <mlx.h>
 
-t_env		*env(void)
-{
-	static t_env	e;
-
-	return (&e);
-}
-
-t_texture	*texture(void)
-{
-	static t_texture	t;
-
-	return (&t);
-}
-
-t_texture	*gun(void)
-{
-	static t_texture	g;
-
-	return (&g);
-}
-
-t_texture	*portal_blue(void)
-{
-	static t_texture	p;
-
-	return (&p);
-}
-
-t_texture	*portal_red(void)
-{
-	static t_texture	p;
-
-	return (&p);
-}
-
 int			init_wall_texture(void)
 {
-	if (!(texture()->img = mlx_xpm_file_to_image(env()->mlx, "mur_portal.xpm",
+	if (!(texture()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/mur_portal.xpm",
 	&texture()->width, &texture()->height)))
 		return (ft_retmsg("cannot load image ol.xpm :/", 2));
 	texture()->ptr = mlx_get_data_addr(texture()->img, &texture()->bpp,
@@ -61,7 +27,8 @@ int			init_wall_texture(void)
 
 int			init_portal_gun_texture(void)
 {
-	if (!(gun()->img = mlx_xpm_file_to_image(env()->mlx, "portal_gun.xpm",
+	if (!(gun()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/portal_gun.xpm",
 	&gun()->width, &gun()->height)))
 		return (ft_retmsg("cannot load image portal_gun.xpm :/", 2));
 	gun()->ptr = mlx_get_data_addr(gun()->img, &gun()->bpp,
@@ -71,7 +38,8 @@ int			init_portal_gun_texture(void)
 
 int			init_portal_blue_texture(void)
 {
-	if (!(portal_blue()->img = mlx_xpm_file_to_image(env()->mlx, "portal_bleu.xpm",
+	if (!(portal_blue()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/portal_bleu.xpm",
 	&portal_blue()->width, &portal_blue()->height)))
 		return (ft_retmsg("cannot load image portal_bleu.xpm :/", 2));
 	portal_blue()->ptr = mlx_get_data_addr(portal_blue()->img, &portal_blue()->bpp,
@@ -81,7 +49,8 @@ int			init_portal_blue_texture(void)
 
 int			init_portal_red_texture(void)
 {
-	if (!(portal_red()->img = mlx_xpm_file_to_image(env()->mlx, "portal_orange.xpm",
+	if (!(portal_red()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/portal_orange.xpm",
 	&portal_red()->width, &portal_red()->height)))
 		return (ft_retmsg("cannot load image portal_orange.xpm :/", 2));
 	portal_red()->ptr = mlx_get_data_addr(portal_red()->img, &portal_red()->bpp,
