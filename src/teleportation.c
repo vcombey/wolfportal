@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 22:28:06 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 23:15:55 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	teleport_rot(int portal)
 {
 	if (env()->sideblue == env()->sidered)
 	{
-		if (ft_abs(env()->sideblue == 1))
+		if (ft_abs(env()->sideblue) == 1)
 		{
 			cam()->dir.x *= -1;
 			cam()->plane.y *= -1;
