@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/26 22:07:06 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/26 22:48:45 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC =	main.c			\
 		struct.c		\
 		key_pressed.c	\
 		init_texture.c	\
+		trace_portal.c	\
 
 INCLUDE = -I ./libft -I ./include
 

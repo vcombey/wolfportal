@@ -6,32 +6,19 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 22:21:18 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 23:08:27 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static void	ft_trace_textur(int x, double dist_wall,
-		int draw_start, int draw_end, t_double_pos ray_dir)
+static void	ft_trace_textur(int x, int draw_start, int draw_end, int texx)
 {
-	double			wallx;
 	unsigned int	color;
-	int				texx;
 	int				y;
 
-	if (env()->side == 0)
-		wallx = cam()->pos.y + dist_wall * ray_dir.y;
-	else
-		wallx = cam()->pos.x + dist_wall * ray_dir.x;
-	wallx -= (int)wallx;
-	texx = (int)(wallx * (double)WALL_P_WIDTH);
-	if (env()->side == 0 && ray_dir.x > 0)
-		texx = WALL_P_WIDTH - texx - 1;
-	if (env()->side == 1 && ray_dir.y < 0)
-		texx = WALL_P_WIDTH - texx - 1;
-	y = draw_start;
-	while (y < draw_end)
+	y = (draw_start < 0) ? 0 : draw_start;
+	while (y < SCREEN_HEIGHT && draw_end)
 	{
 		color = ft_pixelget(texx, (y - draw_start) *
 				WALL_P_HEIGHT / (draw_end - draw_start), *texture());
@@ -45,80 +32,24 @@ static void	ft_trace_textur(int x, double dist_wall,
 
 void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 {
-	int	lineheight;
-	int	draw_start;
-	int	draw_end;
-	int	p;
+	int				lineheight;
+	int				draw_start;
+	int				draw_end;
+	double			wallx;
+	int				texx;
 
 	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
 	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
-	if (draw_end >= SCREEN_HEIGHT)
-		draw_end = SCREEN_HEIGHT - 1;
-	p = draw_start;
-	ft_trace_textur(x, dist_wall, draw_start, draw_end, ray_dir);
-}
-
-void	trace_portail_step_y(int portal, int draw_start, int draw_end, int x, int y, int texx)
-{
-	int		color;
-
-	if (portal == 3)
-	{
-		if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_blue())) == 0x00ff00)
-		{
-			color = ft_pixelget(texx, (y - draw_start) * WALL_P_HEIGHT / (draw_end - draw_start), *texture());
-			if (env()->side == 1)
-				color = (color >> 1) & 8355711;
-		}
-		if (ft_pixelget_img(x, y) == 0x0)
-			ft_pixelput(x, y, color);
-	}
-	else
-	{
-		if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_red())) == 0x00ff00)
-		{
-			color = ft_pixelget(texx, (y - draw_start) * WALL_P_HEIGHT  / (draw_end - draw_start), *texture());
-			if (env()->side == 1)
-				color = (color >> 1) & 8355711;
-		}
-		if (ft_pixelget_img(x, y) == 0x0)
-			ft_pixelput(x, y, color);
-	}
-}
-
-void	trace_portail(int x, double dist_wall, int portal)
-{
-	int		lineheight;
-	int		draw_start;
-	int		draw_end;
-	double	wallx;
-	int		texx;
-	int		y;
-
-	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
-	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
-	if (draw_end >= SCREEN_HEIGHT)
-		draw_end = SCREEN_HEIGHT - 1;
 	if (env()->side == 0)
-		wallx = cam()->pos.y + dist_wall * env()->ray_dir.y;
+		wallx = cam()->pos.y + dist_wall * ray_dir.y;
 	else
-		wallx = cam()->pos.x + dist_wall * env()->ray_dir.x;
+		wallx = cam()->pos.x + dist_wall * ray_dir.x;
 	wallx -= (int)wallx;
-	texx = (int)(wallx * (double)portal_blue()->width);
-	if (env()->side == 0 && env()->ray_dir.x > 0)
-		texx = portal_blue()->width - texx - 1;
-	if (env()->side == 1 && env()->ray_dir.y < 0)
-		texx = portal_blue()->width - texx - 1;
-	y = draw_start;
-	while (y < draw_end)
-	{
-		trace_portail_step_y(portal, draw_start, draw_end, x, y, texx);
-		y++;
-	}
+	texx = (int)(wallx * (double)WALL_P_WIDTH);
+	if (env()->side == 0 && ray_dir.x > 0)
+		texx = WALL_P_WIDTH - texx - 1;
+	if (env()->side == 1 && ray_dir.y < 0)
+		texx = WALL_P_WIDTH - texx - 1;
+	ft_trace_textur(x, draw_start, draw_end, texx);
 }
