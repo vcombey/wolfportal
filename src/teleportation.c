@@ -6,18 +6,42 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 12:27:37 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 22:26:20 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "libft.h"
 
-void	teleport_rot(int portal)
+void	teleport_rot_perpendicular(int portal)
 {
 	int		a;
 	int		b;
 
+	if (portal == 3)
+	{
+		a = transform_sidecolor(env()->sidered);
+		b = transform_sidecolor(env()->sideblue);
+	}
+	else
+	{
+		b = transform_sidecolor(env()->sidered);
+		a = transform_sidecolor(env()->sideblue);
+	}
+	if (a < b || (a == 4 && b == 1))
+	{
+		ft_rev_rot_double(&cam()->dir);
+		ft_rev_rot_double(&cam()->plane);
+	}
+	else if (a > b || (a == 1 && b == 4))
+	{
+		ft_rot_double(&cam()->dir);
+		ft_rot_double(&cam()->plane);
+	}
+}
+
+void	teleport_rot(int portal)
+{
 	if (env()->sideblue == env()->sidered)
 	{
 		if (ft_abs(env()->sideblue == 1))
@@ -32,28 +56,7 @@ void	teleport_rot(int portal)
 		}
 	}
 	else if (ft_abs(env()->sideblue) != ft_abs(env()->sidered))
-	{
-		if (portal == 3)
-		{
-			a = transform_sidecolor(env()->sidered);
-			b = transform_sidecolor(env()->sideblue);
-		}
-		else
-		{
-			b = transform_sidecolor(env()->sidered);
-			a = transform_sidecolor(env()->sideblue);
-		}
-		if (a < b || (a == 4 && b == 1))
-		{
-			ft_rev_rot_double(&cam()->dir);
-			ft_rev_rot_double(&cam()->plane);
-		}
-		else if (a > b || (a == 1 && b == 4))
-		{
-			ft_rot_double(&cam()->dir);
-			ft_rot_double(&cam()->plane);
-		}
-	}
+		teleport_rot_perpendicular(portal);
 }
 
 void	teleport_pos(int portal)
