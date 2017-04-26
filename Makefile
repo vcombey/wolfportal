@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/26 11:52:10 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/26 14:23:42 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC =	main.c			\
 		cross.c			\
 		ft_rot_pos.c	\
 		hit_portal.c	\
+		hit.c			\
 
 INCLUDE = -I ./libft -I ./include
 

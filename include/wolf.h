@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 12:17:22 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 14:23:27 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void				display_map(void);
 void				init_cam(void);
 t_camera			*cam(void);
 void				ft_wolf(void);
+int					ft_hit(double proj, int portal, t_dda dda);
 
 t_texture			*texture(void);
 t_texture			*gun(void);
