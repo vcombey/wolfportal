@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/21 11:12:51 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/25 20:56:22 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,7 @@ int		ft_key_release(int keycode, void *param)
 		key()->up = 0;
 	}
 	if (keycode == KEY_DOWN)
-	{
 		key()->down = 0;
-		portal_gun_shoot(keycode);
-	}
 	if (keycode == KEY_RIGHT)
 		key()->right = 0;
 	if (keycode == KEY_LEFT)
@@ -125,9 +122,6 @@ int		ft_key_release(int keycode, void *param)
 	if (keycode == KEY_ESCAPE)
 		exit(0);
 	if (keycode == KEY_Z || keycode == KEY_S)
-	{
 		portal_gun_shoot(keycode);
-		printf("lala\n");
-	}
 	return (0);
 }

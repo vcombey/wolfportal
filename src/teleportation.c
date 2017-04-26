@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/21 10:55:00 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 12:27:37 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	teleport_rot(int portal)
 {
 	int		a;
 	int		b;
-	double	tmp;
 
 	if (env()->sideblue == env()->sidered)
 	{
@@ -46,21 +45,13 @@ void	teleport_rot(int portal)
 		}
 		if (a < b || (a == 4 && b == 1))
 		{
-			tmp = cam()->dir.y;
-			cam()->dir.y = -cam()->dir.x;
-			cam()->dir.x = tmp;
-			tmp = cam()->plane.y;
-			cam()->plane.y = -cam()->plane.x;
-			cam()->plane.x = tmp;
+			ft_rev_rot_double(&cam()->dir);
+			ft_rev_rot_double(&cam()->plane);
 		}
 		else if (a > b || (a == 1 && b == 4))
 		{
-			tmp = -cam()->dir.y;
-			cam()->dir.y = cam()->dir.x;
-			cam()->dir.x = tmp;
-			tmp = -cam()->plane.y;
-			cam()->plane.y = cam()->plane.x;
-			cam()->plane.x = tmp;
+			ft_rot_double(&cam()->dir);
+			ft_rot_double(&cam()->plane);
 		}
 	}
 }
@@ -92,5 +83,3 @@ void	teleport_pos(int portal)
 		cam()->pos.y += cam()->dir.y * 0.1;
 	}
 }
-//&& good_side_portal(step, env()->sidered))
-//&& good_side_portal(step, env()->sideblue))

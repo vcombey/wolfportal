@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/25 13:50:54 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/25 20:57:50 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	ft_trace_textur(int x, double dist_wall,
 	while (y < draw_end)
 	{
 		color = ft_pixelget(texx, (y - draw_start) *
-				WALL_p_HEIGHT / (draw_end - draw_start));
+				WALL_p_HEIGHT / (draw_end - draw_start), *texture());
 		if (env()->side == 1)
 			color = (color >> 1) & 8355711;
-		if (ft_pixelget_img(x, y) == 0)
+		if (ft_pixelget_img(x, y) == 0x0)
 			ft_pixelput(x, y, color);
 		y++;
 	}
@@ -50,7 +50,7 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	int	draw_end;
 	int	p;
 
-	lineheight = (int)(SCREEN_HEIGHT / dist_wall);
+	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -62,42 +62,59 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	//floor_casting(x, dist_wall, draw_end);
 }
 
-void	trace_portail(int x, double dist_wall, int color)
+void	trace_portail(int x, double dist_wall, int portal)
 {
 	int		lineheight;
 	int		draw_start;
 	int		draw_end;
 	double	wallx;
 	int		texx;
+	int		color;
 	int		y;
 
 
-	lineheight = (int)(SCREEN_HEIGHT / dist_wall);
+	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
 	if (draw_end >= SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT - 1;
-	ft_pixelput(x, draw_start, color);
-	ft_pixelput(x, draw_end, color);
 	if (env()->side == 0)
 		wallx = cam()->pos.y + dist_wall * env()->ray_dir.y;
 	else
 		wallx = cam()->pos.x + dist_wall * env()->ray_dir.x;
 	wallx -= (int)wallx;
-	texx = (int)(wallx * (double)100);
+	texx = (int)(wallx * (double)portal_blue()->width);
 	if (env()->side == 0 && env()->ray_dir.x > 0)
-		texx = 100 - texx - 1;
+		texx = portal_blue()->width - texx - 1;
 	if (env()->side == 1 && env()->ray_dir.y < 0)
-		texx = 100 - texx - 1;
+		texx = portal_blue()->width - texx - 1;
 	y = draw_start;
-	if (texx == 0 || texx == 99)
+	while (y < draw_end)
 	{
-		while (y < draw_end)
+		if (portal == 3)
 		{
-			ft_pixelput(x, y, color);
-			y++;
+			if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_blue())) == 0x00ff00)
+			{
+				color = ft_pixelget(texx, (y - draw_start) * WALL_p_HEIGHT / (draw_end - draw_start), *texture());
+				if (env()->side == 1)
+					color = (color >> 1) & 8355711;
+			}
+			if (ft_pixelget_img(x, y) == 0x0)
+				ft_pixelput(x, y, color);
 		}
+		else
+		{
+			if ((color = ft_pixelget(texx, (y - draw_start) * portal_blue()->height / (draw_end - draw_start), *portal_red())) == 0x00ff00)
+			{
+				color = ft_pixelget(texx, (y - draw_start) * WALL_p_HEIGHT  / (draw_end - draw_start), *texture());
+				if (env()->side == 1)
+					color = (color >> 1) & 8355711;
+			}
+			if (ft_pixelget_img(x, y) == 0x0)
+				ft_pixelput(x, y, color);
+		}
+		y++;
 	}
 }

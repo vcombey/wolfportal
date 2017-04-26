@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal_gun.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 08:59:29 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/21 11:19:02 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 12:27:23 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <math.h>
 #include <stdio.h>
 
-void	change_portail(int keycode) {
+void	change_portail(int keycode)
+{
 	if (keycode == KEY_Z)
 	{
 		env()->map[env()->red.x][env()->red.y] = 1;
@@ -47,7 +48,7 @@ void	change_portail(int keycode) {
 	}
 }
 
-void	ft_shoot(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step, int keycode)
+void	ft_shoot(t_dda dda, int keycode)
 {
 	int hit;
 
@@ -56,37 +57,44 @@ void	ft_shoot(t_double_pos side_dist, t_double_pos delta_dist, t_int_pos step, i
 	env()->wall.y = (int)cam()->pos.y;
 	while (hit == 0)
 	{
-		if (side_dist.x < side_dist.y)
+		if ((dda.side_dist)->x < (dda.side_dist)->y)
 		{
-			side_dist.x += delta_dist.x;
-			env()->wall.x += step.x;
+			(dda.side_dist)->x += (dda.delta_dist)->x;
+			env()->wall.x += (dda.step)->x;
 			env()->side = 0;
 		}
 		else
 		{
-			side_dist.y += delta_dist.y;
-			env()->wall.y += step.y;
+			(dda.side_dist)->y += (dda.delta_dist)->y;
+			env()->wall.y += (dda.step)->y;
 			env()->side = 1;
 		}
 		if ((env()->map[env()->wall.x][env()->wall.y]) > 0)
 			hit = 1;
-		//printf("wallx-> %d\n", env()->wall.x);
 	}
 	change_portail(keycode);
 }
 
 void	portal_gun_shoot(int keycode)
 {
+	t_dda			dda;
+	t_double_pos	ray_dir;
+	t_double_pos	side_dist;
 	t_double_pos	delta_dist;
 	t_int_pos		step;
-	t_double_pos	side_dist;
 
-	delta_dist.x = sqrt(1 + (cam()->dir.y * cam()->dir.y) /
+	dda.ray_dir = &ray_dir;
+	dda.side_dist = &side_dist;
+	dda.delta_dist = &delta_dist;
+	dda.step = &step;
+	(dda.delta_dist)->x = sqrt(1 + (cam()->dir.y * cam()->dir.y) /
 			(cam()->dir.x * cam()->dir.x));
-	delta_dist.y = sqrt(1 + (cam()->dir.x * cam()->dir.x) /
+	(dda.delta_dist)->y = sqrt(1 + (cam()->dir.x * cam()->dir.x) /
 			(cam()->dir.y * cam()->dir.y));
-	ft_init_dist(&cam()->dir, &side_dist, &delta_dist, &step);
-	return (ft_shoot(side_dist, delta_dist, step, keycode));
+	(dda.ray_dir)->x = cam()->dir.x;
+	(dda.ray_dir)->y = cam()->dir.y;
+	ft_init_dist(dda);
+	return (ft_shoot(dda, keycode));
 }
 
 unsigned int		ft_pixelget_gun(int x, int y)
@@ -105,22 +113,22 @@ unsigned int		ft_pixelget_gun(int x, int y)
 
 void	draw_portal_gun()
 {
-	int x;
-	int	y;
+	double			y;
+	double			x;
 	unsigned int	color;
 
-	x = 2 * SCREEN_HEIGHT / 3;
-	y = SCREEN_WIDTH / 2;
-	while (x < SCREEN_HEIGHT)
+	y = 2 * SCREEN_HEIGHT / 3;
+	x = SCREEN_WIDTH / 2;
+	while (y < SCREEN_HEIGHT)
 	{
-		y = SCREEN_WIDTH / 2;
-		while (y < SCREEN_WIDTH)
+		x = SCREEN_WIDTH / 2;
+		while (x < SCREEN_WIDTH)
 		{
-			if ((color = ft_pixelget_gun((y / SCREEN_WIDTH / 2 - 1) * PORTAL_GUN_WIDTH, ((x - (2 * SCREEN_HEIGHT / 3))/ SCREEN_HEIGHT / 3) * PORTAL_GUN_HEIGHT)) != 0xFFFFFF)
-				ft_pixelput(y, x, color);
-			y++;
+			if ((color = ft_pixelget_gun((x / (SCREEN_WIDTH / 2) - 1) * PORTAL_GUN_WIDTH, ((y - (2 * SCREEN_HEIGHT / 3))/ (SCREEN_HEIGHT / 3)) * PORTAL_GUN_HEIGHT)) < 0xFFFFFF)
+				ft_pixelput(x, y, color);
+			x++;
 		}
-		x++;
+		y++;
 
 	}
 }

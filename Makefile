@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/20 15:40:45 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/26 11:52:10 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,15 @@ SRC =	main.c			\
 		portal_gun.c	\
 		teleportation.c	\
 		cross.c			\
+		ft_rot_pos.c	\
+		hit_portal.c	\
 
-INCLUDE = include/
+INCLUDE = -I ./libft -I ./include
+
 
 OBJS = $(addprefix objs/, $(SRC:.c=.o))
 
-CFLAGS += -Wall -g -o2 -flto -Wextra -Werror -I./libft -I. -I./libft/includes
-
+CFLAGS += -Wall -g -o2 -flto -Wextra -Werror
 all: $(NAME)
 
 $(NAME): dis $(OBJS)
@@ -52,7 +54,7 @@ re: fclean all
 
 objs/%.o : src/%.c
 	@/bin/mkdir -p objs
-	gcc -g $(CFLAGS) -I $(INCLUDE) -c -o $@ $<
+	gcc -g $(INCLUDE) $(CFLAGS) -c -o $@ $<
 
 dis:
 	@echo " __   __  ___     ______    ___       _______   _______  ________   "

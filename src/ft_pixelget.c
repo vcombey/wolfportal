@@ -6,25 +6,25 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:04 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/21 11:14:57 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/25 16:36:29 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "wolf.h"
 
-unsigned int		ft_pixelget(int x, int y)
+unsigned int		ft_pixelget(int x, int y, t_texture t)
 {
 	int				dest;
 
 	if (y < 0 || x < 0)
 		return (0);
-	dest = y * texture()->size_line + x * (texture()->bpp / 8);
-	if ((WALL_p_HEIGHT * WALL_p_WIDTH * (texture()->bpp / 8)) <= dest)
+	dest = y * t.size_line + x * (t.bpp / 8);
+	if ((t.height * t.width * (t.bpp / 8)) <= dest)
 		return (0);
 	if (dest < 0)
 		return (0);
-	return (*(unsigned int *)(&texture()->ptr[dest]));
+	return (*(unsigned int *)(&t.ptr[dest]));
 }
 
 unsigned int		ft_pixelget_img(int x, int y)

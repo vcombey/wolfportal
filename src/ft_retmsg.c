@@ -6,12 +6,12 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:24 by vcombey           #+#    #+#             */
-/*   Updated: 2017/01/05 19:20:21 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/26 11:52:24 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/libft.h"
+#include "libft.h"
 
 int		ft_retmsg(char *message, int sortie)
 {
