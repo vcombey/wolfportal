@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 23:18:45 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 12:06:11 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ void	ft_wolf(void)
 	while (x < SCREEN_WIDTH)
 	{
 		dist_wall = ft_calc_dist(x, dda);
-		ft_trace_colone(x, dist_wall, *(dda.ray_dir));
+		if (dist_wall < 600)
+			ft_trace_colone(x, dist_wall, *(dda.ray_dir));
 		x++;
 	}
 }
