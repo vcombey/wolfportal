@@ -6,19 +6,20 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 13:53:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 15:27:56 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 16:56:39 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include "libft.h"
 #include <stdlib.h>
-	#include <stdio.h>
+#include <stdio.h>
 
 void	trace_tourelle_step_y(int tourelle_y, int x, int y, int texx)
 {
-	int		color;
+	unsigned int		color;
 
-	if (((color = ft_pixelget(texx, tourelle_y, *tourelle())) != 0x00ff00) && (ft_pixelget_img(x, y) == 0x0))
+	if (((color = ft_pixelget(texx, tourelle_y, *tourelle())) != 0xFF000000) && (ft_pixelget_img(x, y) == 0x0))
 		ft_pixelput(x, y, color);
 }
 
@@ -31,8 +32,8 @@ void	draw_tourelle(int x, double dist_wall)
 	int		texx;
 	int		y;
 
-	lineheight = (int)((SCREEN_HEIGHT / dist_wall) / 3);
-	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
+	lineheight = (int)((SCREEN_HEIGHT / dist_wall) *1.5);
+	draw_start = SCREEN_HEIGHT / 2;
 	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
 	if (env()->side == 0)
 		wallx = cam()->pos.y + dist_wall * env()->ray_dir.y;
@@ -61,9 +62,27 @@ t_texture	*tourelle(void)
 
 void	tourelle_shoot(void)
 {
+	int		x;
+	int		y;
 	if ((env()->map[(int)cam()->pos.x][(int)cam()->pos.y]) == -1)
+	{
 		env()->life--;
-	printf("live:%d",env()->life);
+		y = 0;
+		while (y < SCREEN_HEIGHT)
+		{
+			x = 0;
+			while (x < SCREEN_WIDTH)
+			{
+				ft_pixelput(x, y, 0xF0FF0000);
+				x++;
+			}
+			y++;
+		}
+
+	}
 	if (env()->life == 0)
+	{
+		ft_putstr("GAME OVER\n");
 		exit(0);
+	}
 }

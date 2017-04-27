@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 15:26:00 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 15:40:25 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		ft_move(void)
 				[(int)cam()->pos.y] <= 0)
 			cam()->pos.x += cam()->dir.x * 0.1;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y + cam()->dir.y * 0.1)] == 0)
+				[(int)(cam()->pos.y + cam()->dir.y * 0.1)] <= 0)
 			cam()->pos.y += cam()->dir.y * 0.1;
 	}
 	if (key()->down)
@@ -66,7 +66,7 @@ void		ft_move(void)
 				[(int)cam()->pos.y] <= 0)
 			cam()->pos.x -= cam()->dir.x * 0.1;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y - cam()->dir.y * 0.1)] == 0)
+				[(int)(cam()->pos.y - cam()->dir.y * 0.1)] <= 0)
 			cam()->pos.y -= cam()->dir.y * 0.1;
 	}
 }

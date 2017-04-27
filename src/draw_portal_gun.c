@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:49:16 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 13:55:52 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 16:46:48 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void				draw_portal_gun(void)
 	double			x;
 	unsigned int	color;
 
-	y = 2 * SCREEN_HEIGHT / 3;
+	y = 3 * SCREEN_HEIGHT / 5;
 	x = SCREEN_WIDTH / 2;
 	while (y < SCREEN_HEIGHT)
 	{
@@ -27,9 +27,9 @@ void				draw_portal_gun(void)
 		while (x < SCREEN_WIDTH)
 		{
 			if ((color = ft_pixelget((x / (SCREEN_WIDTH / 2) - 1) *
-			PORTAL_GUN_WIDTH, ((y - (2 * SCREEN_HEIGHT / 3)) /
-			(SCREEN_HEIGHT / 3)) * PORTAL_GUN_HEIGHT, *gun()))
-			< 0xFFFFFF)
+			gun()->width, ((y - (3 * SCREEN_HEIGHT / 5)) /
+			(2 * SCREEN_HEIGHT / 5)) * gun()->height, *gun()))
+			!= 0xFF000000)
 				ft_pixelput(x, y, color);
 			x++;
 		}
