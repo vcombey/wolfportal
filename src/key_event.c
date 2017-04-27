@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 21:39:22 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 15:26:00 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,24 @@ void		ft_move(void)
 
 	if (key()->up)
 	{
-		if ((portal = env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.5)]
-					[(int)(cam()->pos.y + cam()->dir.y * 0.5)]) >= 3)
+		if ((portal = env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.1)]
+					[(int)(cam()->pos.y + cam()->dir.y * 0.1)]) >= 3)
 			teleport_pos(portal);
-		if (env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.05)]
-				[(int)cam()->pos.y] == 0)
-			cam()->pos.x += cam()->dir.x * 0.05;
+		if (env()->map[(int)(cam()->pos.x + cam()->dir.x * 0.1)]
+				[(int)cam()->pos.y] <= 0)
+			cam()->pos.x += cam()->dir.x * 0.1;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y + cam()->dir.y * 0.05)] == 0)
-			cam()->pos.y += cam()->dir.y * 0.05;
+				[(int)(cam()->pos.y + cam()->dir.y * 0.1)] == 0)
+			cam()->pos.y += cam()->dir.y * 0.1;
 	}
 	if (key()->down)
 	{
-		if (env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.05)]
-				[(int)cam()->pos.y] == 0)
-			cam()->pos.x -= cam()->dir.x * 0.05;
+		if (env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.1)]
+				[(int)cam()->pos.y] <= 0)
+			cam()->pos.x -= cam()->dir.x * 0.1;
 		if (env()->map[(int)cam()->pos.x]
-				[(int)(cam()->pos.y - cam()->dir.y * 0.05)] == 0)
-			cam()->pos.y -= cam()->dir.y * 0.05;
+				[(int)(cam()->pos.y - cam()->dir.y * 0.1)] == 0)
+			cam()->pos.y -= cam()->dir.y * 0.1;
 	}
 }
 
@@ -76,6 +76,7 @@ int			recalc_img(void *param)
 	(void)param;
 	ft_move();
 	ft_turn();
+	tourelle_shoot();
 	ft_memset(env()->ptr, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	ft_wolf();
 	cross();

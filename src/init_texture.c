@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 21:49:16 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 22:07:43 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 14:46:49 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,16 @@ int			init_portal_red_texture(void)
 		return (ft_retmsg("cannot load image portal_orange.xpm :/", 2));
 	portal_red()->ptr = mlx_get_data_addr(portal_red()->img, &portal_red()->bpp,
 	&portal_red()->size_line, &portal_red()->endian);
+	return (0);
+}
+
+int			init_tourelle_texture(void)
+{
+	if (!(tourelle()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/tourelle.xpm",
+	&tourelle()->width, &tourelle()->height)))
+		return (ft_retmsg("cannot load image tourelle.xpm :/", 2));
+	tourelle()->ptr = mlx_get_data_addr(tourelle()->img, &tourelle()->bpp,
+	&tourelle()->size_line, &tourelle()->endian);
 	return (0);
 }

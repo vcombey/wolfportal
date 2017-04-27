@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:20:43 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:23:29 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 15:28:41 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,11 @@ int		ft_hit(double proj, int portal, t_dda dda)
 		hit_portal_red(proj, portal, dda);
 		return (0);
 	}
-	return (portal == 2) ? 0 : 1;
+	else if (portal == 5)
+	{
+		draw_tourelle(dda.x, (env()->side == 0) ? (dda.side_dist)->x / proj :
+			(dda.side_dist)->y / proj);
+		return (0);
+	}
+	return (1);
 }

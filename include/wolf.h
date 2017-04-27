@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 21:42:55 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 14:55:21 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_env
 	t_int_pos		blue;
 	int				sidered;
 	int				sideblue;
+	int				life;
 }					t_env;
 
 typedef struct		s_dda
@@ -176,4 +177,9 @@ void				transform_direction_ray_portal(int portal, t_dda dda);
 void				ft_init_dist(t_dda dda);
 
 int					recalc_img(void *param);
+t_texture			*tourelle(void);
+void				tourelle_shoot(void);
+int					init_tourelle_texture(void);
+
+void				draw_tourelle(int x, double dist_wall);
 #endif

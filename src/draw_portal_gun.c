@@ -6,26 +6,12 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:49:16 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:53:59 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 13:55:52 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <math.h>
-
-unsigned int		ft_pixelget_gun(int x, int y)
-{
-	int				dest;
-
-	if (y < 0 || x < 0)
-		return (0);
-	dest = y * gun()->size_line + x * (gun()->bpp / 8);
-	if ((PORTAL_GUN_HEIGHT * PORTAL_GUN_WIDTH * (gun()->bpp / 8)) <= dest)
-		return (0);
-	if (dest < 0)
-		return (0);
-	return (*(unsigned int *)(&gun()->ptr[dest]));
-}
 
 void				draw_portal_gun(void)
 {

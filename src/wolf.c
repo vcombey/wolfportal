@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 12:06:11 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/27 15:22:58 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,26 @@ void	increment_dist(t_dda dda)
 
 double	ft_dda(t_dda dda, double proj)
 {
-	int		hit;
 	int		portal;
 
-	hit = 0;
-	while (hit == 0)
+	while (1)
 	{
 		if ((dda.side_dist)->x < (dda.side_dist)->y && ((portal = env()->map
 		[env()->wall.x + (dda.step)->x][env()->wall.y]) > 0))
 		{
 			env()->side = 0;
-			hit = ft_hit(proj, portal, dda);
+			if (ft_hit(proj, portal, dda))
+				break;
 		}
 		else if ((dda.side_dist)->y < (dda.side_dist)->x && ((portal =
 						env()->map[env()->wall.x][env()->wall.y +
 						(dda.step)->y]) > 0))
 		{
 			env()->side = 1;
-			hit = ft_hit(proj, portal, dda);
+			if (ft_hit(proj, portal, dda))
+				break;
 		}
-		else
-			increment_dist(dda);
+		increment_dist(dda);
 	}
 	return (env()->side == 0) ? (dda.side_dist)->x / proj :
 	(dda.side_dist)->y / proj;
