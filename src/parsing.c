@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 16:25:45 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 15:30:00 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 12:05:47 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ static void		ft_fill_line(char **l, int i)
 	int				j;
 	int				n;
 	static int		nb_spawn = 0;
+	int				nbr;
 
 	n = ft_fill_init(l, i);
 	j = 0;
 	while (j < n)
 	{
-		//if (strlen(l[j]) != 1 || l[j][0] < 48 || l[j][0] > 54)
-		//	ft_exit("error : bad characters in the file", 2);
-		if (l[j][0] == '2' && nb_spawn != 0)
+		if (!(ft_atoi_safe(l[j], &nbr) || !(nbr == 5 ||  nbr == 0 || nbr == -2 || nbr == 1)))
+			ft_exit("error : bad characters in the file", 2);
+		if (nbr == 2 && nb_spawn != 0)
 			ft_exit("error : file must have exactly one spawn", 2);
-		if (l[j][0] == '2')
+		if (nbr == 2)
 		{
 			nb_spawn++;
 			cam()->pos.x = i + 1 + 0.5;
@@ -55,7 +56,7 @@ static void		ft_fill_line(char **l, int i)
 			env()->map[i][j] = 0;
 		}
 		else
-			env()->map[i][j] = ft_atoi(l[j]);
+			env()->map[i][j] = nbr;
 		j++;
 	}
 	if ((i == env()->map_height - 1) && nb_spawn != 1)

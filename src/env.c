@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/27 15:31:38 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 12:26:32 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		init_env(char *file)
 		return (ft_retmsg("mlx problem", 2));
 	env()->ptr = mlx_get_data_addr(env()->img, &env()->bpp, &env()->size_line,
 	&env()->endian);
-	env()->life = 50;
+	env()->life = 500;
 	init_portal_in_env();
 	return (0);
 }

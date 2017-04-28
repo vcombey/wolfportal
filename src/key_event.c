@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 15:40:25 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 10:37:14 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int			recalc_img(void *param)
 	(void)param;
 	ft_move();
 	ft_turn();
-	tourelle_shoot();
 	ft_memset(env()->ptr, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	ft_wolf();
+	tourelle_shoot();
 	cross();
 	draw_portal_gun();
 	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);

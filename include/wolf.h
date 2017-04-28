@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 14:55:21 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 12:26:08 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,5 @@ void				tourelle_shoot(void);
 int					init_tourelle_texture(void);
 
 void				draw_tourelle(int x, double dist_wall);
+void				ft_trace_line(t_double_pos a, t_double_pos b);
 #endif

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 03:06:17 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 12:43:44 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 10:49:03 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void				tab_free(char **tab);
 
 int					get_next_line(const int fd, char **line);
 int					ft_abs(int n);
+int					ft_atoi_safe(const char *str, int *result);
 
 #endif

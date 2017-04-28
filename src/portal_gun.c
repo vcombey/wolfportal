@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 08:59:29 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:50:12 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 10:39:46 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_shoot(t_dda dda, int keycode)
 			env()->wall.y += (dda.step)->y;
 			env()->side = 1;
 		}
-		if ((env()->map[env()->wall.x][env()->wall.y]) > 0)
+		if ((env()->map[env()->wall.x][env()->wall.y]) > 0 &&
+				env()->map[env()->wall.x][env()->wall.y] != 5)
 			hit = 1;
 	}
 	change_portail(keycode);
