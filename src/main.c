@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:38 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 18:58:53 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 19:47:38 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		main(int ac, char **av)
 	init_portal_gun_texture();
 	init_portal_blue_texture();
 	init_portal_red_texture();
-	init_floor_texture();
 	init_tourelle_texture();
 	mlx_hook(env()->win, KEYPRESS, KEYPRESSMASK, &ft_key_pressed, NULL);
 	mlx_hook(env()->win, KEYRELEA, KEYRELEAMASK, &ft_key_release, NULL);

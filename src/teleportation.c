@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 18:26:20 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 19:47:13 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,48 @@ void	teleport_rot(int portal)
 		teleport_rot_perpendicular(portal);
 }
 
+void	teleport_pos_blue(int portal)
+{
+	cam()->pos.x = (double)env()->blue.x;
+	cam()->pos.y = (double)env()->blue.y;
+	if (ft_abs(env()->sideblue) == 1)
+	{
+		cam()->pos.x -= (double)env()->sideblue;
+		cam()->pos.y += 0.5;
+	}
+	else
+	{
+		cam()->pos.y -= ((double)env()->sideblue / 2);
+		cam()->pos.x += 0.5;
+	}
+	teleport_rot(portal);
+	cam()->pos.x += cam()->dir.x * 0.1;
+	cam()->pos.y += cam()->dir.y * 0.1;
+}
+
+void	teleport_pos_red(int portal)
+{
+	cam()->pos.x = (double)env()->red.x;
+	cam()->pos.y = (double)env()->red.y;
+	if (ft_abs(env()->sidered) == 1)
+	{
+		cam()->pos.x -= (double)env()->sidered;
+		cam()->pos.y += 0.5;
+	}
+	else
+	{
+		cam()->pos.y -= ((double)env()->sidered / 2);
+		cam()->pos.x += 0.5;
+	}
+	teleport_rot(portal);
+	cam()->pos.x += cam()->dir.x * 0.1;
+	cam()->pos.y += cam()->dir.y * 0.1;
+}
+
 void	teleport_pos(int portal)
 {
 	if (portal == 3)
-	{
-		cam()->pos.x = (double)env()->blue.x;
-		cam()->pos.y = (double)env()->blue.y;
-		if (ft_abs(env()->sideblue) == 1)
-		{
-			cam()->pos.x -= (double)env()->sideblue;
-			cam()->pos.y += 0.5;
-		}
-		else
-		{
-			cam()->pos.y -= ((double)env()->sideblue / 2);
-			cam()->pos.x += 0.5;
-		}
-		teleport_rot(portal);
-		cam()->pos.x += cam()->dir.x * 0.1;
-		cam()->pos.y += cam()->dir.y * 0.1;
-	}
+		teleport_pos_blue(portal);
 	else if (portal == 4)
-	{
-		cam()->pos.x = (double)env()->red.x;
-		cam()->pos.y = (double)env()->red.y;
-		if (ft_abs(env()->sidered) == 1)
-		{
-			cam()->pos.x -= (double)env()->sidered;
-			cam()->pos.y += 0.5;
-		}
-		else
-		{
-			cam()->pos.y -= ((double)env()->sidered / 2);
-			cam()->pos.x += 0.5;
-		}
-		teleport_rot(portal);
-		cam()->pos.x += cam()->dir.x * 0.1;
-		cam()->pos.y += cam()->dir.y * 0.1;
-	}
+		teleport_pos_red(portal);
 }
