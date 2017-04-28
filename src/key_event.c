@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 10:37:14 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 18:39:14 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "math.h"
 #include "stdlib.h"
 #include <mlx.h>
-#include <stdio.h>
 #include "libft.h"
 
 static void	ft_turn(void)
@@ -76,7 +75,7 @@ int			recalc_img(void *param)
 	(void)param;
 	ft_move();
 	ft_turn();
-	ft_memset(env()->ptr, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	ft_memset(env()->ptr, 0x00, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	ft_wolf();
 	tourelle_shoot();
 	cross();

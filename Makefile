@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/28 14:20:49 by vcombey          ###   ########.fr        #
+#    Updated: 2017/04/28 18:47:36 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC =	main.c			\
 		trace_portal.c	\
 		tourelle.c		\
 		trace_line.c	\
+		floor_casting.c	\
 
 INCLUDE = -I ./libft -I ./include
 

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tourelle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 13:53:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 14:05:07 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 16:56:27 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void		laser(int x, int y)
 {

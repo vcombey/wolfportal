@@ -6,11 +6,30 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 14:03:14 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 14:57:52 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 19:05:39 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include <mlx.h>
+
+t_texture	*floor_t(void)
+{
+	static t_texture	f;
+
+	return (&f);
+}
+
+int				init_floor_texture(void)
+{
+	if (!(floor_t()->img = mlx_xpm_file_to_image(env()->mlx,
+					"img/floor.xpm",
+	&floor_t()->width, &floor_t()->height)))
+		return (ft_retmsg("cannot load image floor.xpm :/", 2));
+	floor_t()->ptr = mlx_get_data_addr(floor_t()->img, &floor_t()->bpp,
+	&floor_t()->size_line, &floor_t()->endian);
+	return (0);
+}
 
 static double	calc_wall_x_on_map(double dist_wall)
 {
@@ -70,10 +89,10 @@ void			floor_casting(int x, double dist_wall, int y)
 		curr_floor.x = weight * wall_bottom.x + (1.0 - weight) * cam()->pos.x;
 		curr_floor.y = weight * wall_bottom.y + (1.0 - weight) * cam()->pos.y;
 		ft_pixelput(x, y, 0);
-		ft_pixelput(x, y, ft_pixelget((int)(curr_floor.x * 100) % 100,
-		(int)(curr_floor.y * 100) % 100));
+		ft_pixelput(x, y, ft_pixelget((int)(curr_floor.x * floor_t()->height) % floor_t()->height,
+		(int)(curr_floor.y * floor_t()->height) % floor_t()->height, *floor_t()));
 		ft_pixelput(x, SCREEN_HEIGHT - y, 0);
-		ft_pixelput(x, SCREEN_HEIGHT - y, ft_pixelget((int)(curr_floor.x * 100)
-		% 100, (int)(curr_floor.y * 100) % 100));
+		ft_pixelput(x, SCREEN_HEIGHT - y, ft_pixelget((int)(curr_floor.x * floor_t()->height)
+		% floor_t()->height, (int)(curr_floor.y * floor_t()->height) % floor_t()->height, *floor_t()));
 	}
 }

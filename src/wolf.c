@@ -6,14 +6,13 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 14:05:50 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 18:37:06 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "math.h"
 #include "libft.h"
-#include <stdio.h>
 
 void	increment_dist(t_dda dda)
 {
@@ -53,6 +52,8 @@ double	ft_dda(t_dda dda, double proj)
 				break ;
 		}
 		increment_dist(dda);
+		if ((dda.side_dist)->x > 700 && (dda.side_dist)->y > 700)
+			break ;
 	}
 	return (env()->side == 0) ? (dda.side_dist)->x / proj :
 	(dda.side_dist)->y / proj;

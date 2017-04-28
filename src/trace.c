@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 14:21:57 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 19:05:55 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	if (env()->side == 1 && ray_dir.y < 0)
 		texx = WALL_P_WIDTH - texx - 1;
 	ft_trace_textur(x, draw_start, draw_end, texx);
+	//floor_casting(x, dist_wall, draw_end);
 }

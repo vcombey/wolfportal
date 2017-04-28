@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 14:29:14 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 19:00:05 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,13 @@ void				ft_exit(char *message, int sortie);
 void				display_map(void);
 
 t_texture			*texture(void);
+t_texture			*floor_t(void);
 t_texture			*gun(void);
 t_texture			*portal_blue(void);
 t_texture			*portal_red(void);
 t_texture			*tourelle(void);
 int					init_portal_blue_texture(void);
+int					init_floor_texture(void);
 int					init_portal_red_texture(void);
 int					init_portal_gun_texture(void);
 int					init_wall_texture(void);

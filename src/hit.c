@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:20:43 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 13:54:20 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 16:55:38 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "math.h"
 #include "libft.h"
-#include <stdio.h>
 
 void	hit_portal_blue(double proj, int portal, t_dda dda)
 {
