@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 13:53:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 13:51:44 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 14:05:07 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void		laser(int x, int y, t_dda dda)
+void		laser(int x, int y)
 {
 	t_double_pos	a;
 	t_double_pos	b;
 
 	a.y = (double)x;
 	a.x = (double)y;
-	b.y = (double)(x - (dda.ray_dir)->y * 10);
-	b.x = (double)((double)y + (dda.ray_dir)->x * 10);
+	b.y = (double)((double)x - (env()->ray_dir).y * 1000);
+	b.x = (double)((double)y + ft_double_abs((env()->ray_dir).x) * 1000);
 	ft_trace_line(a, b);
 }
 
-void		trace_tourelle_step_y(int tourelle_y, int x, int y, double wallx, t_dda dda)
+void		trace_tourelle_step_y(int tourelle_y, int x, int y, double wallx)
 {
 	unsigned int		color;
 
@@ -38,7 +38,7 @@ void		trace_tourelle_step_y(int tourelle_y, int x, int y, double wallx, t_dda dd
 		ft_pixelput(x, y, color);
 }
 
-void		draw_tourelle(int x, double dist_wall, t_dda dda)
+void		draw_tourelle(int x, double dist_wall)
 {
 	int		lineheight;
 	int		draw_start;
@@ -62,7 +62,7 @@ void		draw_tourelle(int x, double dist_wall, t_dda dda)
 	while (y < SCREEN_HEIGHT && y < draw_end)
 	{
 		trace_tourelle_step_y((y - draw_start) * tourelle()->height /
-				(draw_end - draw_start), x, y, wallx, dda);
+				(draw_end - draw_start), x, y, wallx);
 		y++;
 	}
 }
@@ -73,7 +73,6 @@ t_texture	*tourelle(void)
 
 	return (&t);
 }
-
 
 void		tourelle_shoot(void)
 {

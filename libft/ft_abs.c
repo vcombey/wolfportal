@@ -6,11 +6,16 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 12:42:50 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/18 12:43:59 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 14:01:01 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_abs(int n)
 {
 	return (n < 0) ? -n : n;
+}
+
+double	ft_double_abs(double f)
+{
+	return (f < 0) ? -f : f;
 }

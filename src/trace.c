@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 12:04:58 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 14:21:57 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	int				draw_end;
 	double			wallx;
 	int				texx;
-	
+
 	lineheight = (int)((SCREEN_HEIGHT / dist_wall) * 1.5);
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
 	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 19:18:52 by vcombey           #+#    #+#             */
-/*   Updated: 2017/01/05 19:29:14 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 14:44:53 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-
-int				ft_count_lines(char *name)
+int			ft_count_lines(char *name)
 {
 	int		i;
 	int		fd;

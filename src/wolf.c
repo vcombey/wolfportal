@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/27 15:22:58 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/04/28 14:05:50 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	ft_dda(t_dda dda, double proj)
 		{
 			env()->side = 0;
 			if (ft_hit(proj, portal, dda))
-				break;
+				break ;
 		}
 		else if ((dda.side_dist)->y < (dda.side_dist)->x && ((portal =
 						env()->map[env()->wall.x][env()->wall.y +
@@ -50,7 +50,7 @@ double	ft_dda(t_dda dda, double proj)
 		{
 			env()->side = 1;
 			if (ft_hit(proj, portal, dda))
-				break;
+				break ;
 		}
 		increment_dist(dda);
 	}
