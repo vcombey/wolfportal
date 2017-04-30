@@ -52,6 +52,9 @@ int		ft_key_release(int keycode, void *param)
 	if (keycode == KEY_ESCAPE)
 		exit(0);
 	if (keycode == KEY_Z || keycode == KEY_S)
+	{
 		portal_gun_shoot(keycode);
+		system("afplay portal_gun_shoot.mp3");
+	}
 	return (0);
 }
