@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 17:15:23 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 19:50:42 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	teleport_pos_blue(int portal)
 {
 	cam()->pos.x = (double)env()->blue.x;
 	cam()->pos.y = (double)env()->blue.y;
-	if (ft_abs(env()->sideblue == 1))
+	if (ft_abs(env()->sideblue) == 1)
 	{
-		cam()->pos.x += (env()->sideblue == -1) ? (double)1 : 0;
+		cam()->pos.x += (env()->sideblue == -1) ? 1.0 : 0;
 		cam()->pos.y += 0.5;
 	}
 	else
 	{
-		cam()->pos.y += (env()->sideblue == -2) ? (double)1 : 0;
+		cam()->pos.y += (env()->sideblue == -2) ? 1.0 : 0;
 		cam()->pos.x += 0.5;
 	}
 	teleport_rot(portal);
@@ -78,12 +78,12 @@ void	teleport_pos_red(int portal)
 	cam()->pos.y = (double)env()->red.y;
 	if (ft_abs(env()->sidered) == 1)
 	{
-		cam()->pos.x += (env()->sidered == -1) ? (double)1 : 0;
+		cam()->pos.x += (env()->sidered == -1) ? 1.0 : 0;
 		cam()->pos.y += 0.5;
 	}
 	else
 	{
-		cam()->pos.y += (env()->sidered == -2) ? (double)1 : 0;
+		cam()->pos.y += (env()->sidered == -2) ? 1.0 : 0;
 		cam()->pos.x += 0.5;
 	}
 	teleport_rot(portal);
@@ -93,8 +93,8 @@ void	teleport_pos_red(int portal)
 
 void	teleport_pos(int portal)
 {
-	if (portal == 3)
+	if (portal == 3 && env()->sideblue != 0)
 		teleport_pos_blue(portal);
-	else if (portal == 4)
+	else if (portal == 4 && env()->sidered != 0)
 		teleport_pos_red(portal);
 }

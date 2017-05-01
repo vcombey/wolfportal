@@ -6,7 +6,7 @@
 #    By: vcombey <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 19:59:01 by vcombey           #+#    #+#              #
-#    Updated: 2017/04/28 18:47:36 by vcombey          ###   ########.fr        #
+#    Updated: 2017/05/01 18:11:47 by vcombey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ re: fclean all
 
 objs/%.o : src/%.c
 	@/bin/mkdir -p objs
-	gcc -g $(INCLUDE) $(CFLAGS) -c -o $@ $<
+	gcc $(INCLUDE) $(CFLAGS) -c -o $@ $<
 
 dis:
 	@echo " __   __  ___     ______    ___       _______   _______  ________   "

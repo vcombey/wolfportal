@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 10:33:09 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 19:48:26 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void		ft_move(void)
 	}
 	if (key()->down)
 	{
+		if ((portal = env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.1)]
+					[(int)(cam()->pos.y - cam()->dir.y * 0.1)]) >= 3)
+			teleport_pos(portal);
 		if (env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.1)]
 				[(int)cam()->pos.y] <= 0)
 			cam()->pos.x -= cam()->dir.x * 0.1;

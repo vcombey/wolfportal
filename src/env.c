@@ -6,25 +6,13 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/04/28 21:17:46 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 18:22:17 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <unistd.h>
 #include <mlx.h>
-
-void	init_portal_in_env(void)
-{
-	env()->map[15][10] = 3;
-	env()->map[17][16] = 4;
-	env()->red.x = 17;
-	env()->red.y = 16;
-	env()->blue.x = 15;
-	env()->blue.y = 10;
-	env()->sidered = 1;
-	env()->sideblue = -1;
-}
 
 int		init_env(char *file)
 {
@@ -49,6 +37,5 @@ int		init_env(char *file)
 	env()->ptr = mlx_get_data_addr(env()->img, &env()->bpp, &env()->size_line,
 	&env()->endian);
 	env()->life = 100;
-	init_portal_in_env();
 	return (0);
 }

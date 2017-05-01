@@ -6,29 +6,13 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 22:47:55 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 17:58:27 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 18:48:28 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
 void	trace_portal_blue_step_y(t_interval w, int x, int y, int texx)
-{
-	int		color;
-
-	if ((color = ft_pixelget(texx, (y - w.start) * portal_blue()->height /
-					(w.end - w.start), *portal_red())) == 0x00ff00)
-	{
-		color = ft_pixelget(texx, (y - w.start) * WALL_P_HEIGHT /
-				(w.end - w.start), *texture());
-		if (env()->side == 1)
-			color = (color >> 1) & 8355711;
-	}
-	if (ft_pixelget_img(x, y) == 0x0)
-		ft_pixelput(x, y, color);
-}
-
-void	trace_portal_red_step_y(t_interval w, int x, int y, int texx)
 {
 	int		color;
 
@@ -40,6 +24,26 @@ void	trace_portal_red_step_y(t_interval w, int x, int y, int texx)
 		if (env()->side == 1)
 			color = (color >> 1) & 8355711;
 	}
+	if (color == 0 && env()->sidered == 0)
+		color = 0x00B2DE;
+	if (ft_pixelget_img(x, y) == 0x0)
+		ft_pixelput(x, y, color);
+}
+
+void	trace_portal_red_step_y(t_interval w, int x, int y, int texx)
+{
+	int		color;
+
+	if ((color = ft_pixelget(texx, (y - w.start) * portal_blue()->height /
+					(w.end - w.start), *portal_red())) == 0x00ff00)
+	{
+		color = ft_pixelget(texx, (y - w.start) * WALL_P_HEIGHT /
+				(w.end - w.start), *texture());
+		if (env()->side == 1)
+			color = (color >> 1) & 8355711;
+	}
+	if (color == 0 && env()->sideblue == 0)
+		color = 0xFFA500;
 	if (ft_pixelget_img(x, y) == 0x0)
 		ft_pixelput(x, y, color);
 }
@@ -52,9 +56,9 @@ void	trace_portal_loop(int portal, int x, t_interval w, int texx)
 	while (y < SCREEN_HEIGHT && y < w.end)
 	{
 		if (portal == 3)
-			trace_portal_blue_step_y(w, x, y, texx);
-		else
 			trace_portal_red_step_y(w, x, y, texx);
+		else
+			trace_portal_blue_step_y(w, x, y, texx);
 		y++;
 	}
 }
