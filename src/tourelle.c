@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 13:53:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 16:56:27 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 10:32:49 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,21 @@ void		tourelle_shoot(void)
 	int		x;
 	int		y;
 
-	if ((env()->map[(int)cam()->pos.x][(int)cam()->pos.y]) == -1)
+	env()->life--;
+	y = 0;
+	while (y < SCREEN_HEIGHT)
 	{
-		env()->life--;
-		y = 0;
-		while (y < SCREEN_HEIGHT)
+		x = 0;
+		while (x < SCREEN_WIDTH)
 		{
-			x = 0;
-			while (x < SCREEN_WIDTH)
-			{
-				ft_pixelput(x, y, 0xF0FF0000);
-				x++;
-			}
-			y++;
+			ft_pixelput(x, y, 0xF0FF0000);
+			x++;
 		}
+		y++;
 	}
-	if (env()->life == 0)
+	if (env()->life <= 0)
 	{
+		system("killall afplay");
 		ft_putstr("GAME OVER\n");
 		exit(0);
 	}

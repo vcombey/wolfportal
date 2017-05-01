@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 21:37:03 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 21:41:29 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 11:04:25 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int		ft_key_pressed(int keycode, void *param)
 	if (keycode == KEY_LEFT)
 		key()->left = 1;
 	if (keycode == KEY_ESCAPE)
+	{
+		system("killall afplay");
 		exit(0);
+	}
 	return (0);
 }
 
@@ -49,12 +52,10 @@ int		ft_key_release(int keycode, void *param)
 		key()->right = 0;
 	if (keycode == KEY_LEFT)
 		key()->left = 0;
-	if (keycode == KEY_ESCAPE)
-		exit(0);
 	if (keycode == KEY_Z || keycode == KEY_S)
 	{
 		portal_gun_shoot(keycode);
-		system("afplay portal_gun_shoot.mp3");
+		system("afplay sound/portal_gun_shoot.mp3 &");
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 19:47:13 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 13:54:32 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	teleport_rot_perpendicular(int portal)
 		b = transform_sidecolor(env()->sidered);
 		a = transform_sidecolor(env()->sideblue);
 	}
-	if (a < b || (a == 4 && b == 1))
+	if ((a < b && !(a == 1 && b == 4)) || (a == 4 && b == 1))
 	{
 		ft_rev_rot_double(&cam()->dir);
 		ft_rev_rot_double(&cam()->plane);
@@ -44,16 +44,10 @@ void	teleport_rot(int portal)
 {
 	if (env()->sideblue == env()->sidered)
 	{
-		if (ft_abs(env()->sideblue) == 1)
-		{
-			cam()->dir.x *= -1;
-			cam()->plane.y *= -1;
-		}
-		else
-		{
-			cam()->dir.y *= -1;
-			cam()->plane.x *= -1;
-		}
+		cam()->dir.x *= -1;
+		cam()->dir.y *= -1;
+		cam()->plane.x *= -1;
+		cam()->plane.y *= -1;
 	}
 	else if (ft_abs(env()->sideblue) != ft_abs(env()->sidered))
 		teleport_rot_perpendicular(portal);

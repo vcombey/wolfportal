@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 18:39:14 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 10:33:09 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,15 @@ int			recalc_img(void *param)
 	ft_turn();
 	ft_memset(env()->ptr, 0x00, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	ft_wolf();
-	tourelle_shoot();
+	if ((env()->map[(int)cam()->pos.x][(int)cam()->pos.y]) == -1)
+	{
+		if (env()->sound == 0)
+		{
+			system("afplay sound/tourelle.mp3 &");
+			env()->sound = 1;
+		}
+		tourelle_shoot();
+	}
 	cross();
 	draw_portal_gun();
 	mlx_put_image_to_window(env()->mlx, env()->win, env()->img, 0, 0);

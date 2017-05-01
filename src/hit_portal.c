@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:26:52 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/26 22:24:12 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 13:50:57 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	transform_direction_ray_portal_perpendicular(int portal, t_dda dda)
 		b = transform_sidecolor(env()->sidered);
 		a = transform_sidecolor(env()->sideblue);
 	}
-	if (a < b || (a == 4 && b == 1))
+	if ((a < b && !(a == 1 && b == 4)) || (a == 4 && b == 1))
 	{
 		ft_rev_rot_int((dda.step));
 		ft_rev_rot_double((dda.ray_dir));
