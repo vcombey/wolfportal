@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 19:48:26 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 20:36:55 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_turn(void)
 	}
 }
 
-void		ft_move(void)
+void	mv_up(void)
 {
 	int		portal;
 
@@ -59,6 +59,12 @@ void		ft_move(void)
 				[(int)(cam()->pos.y + cam()->dir.y * 0.1)] <= 0)
 			cam()->pos.y += cam()->dir.y * 0.1;
 	}
+}
+
+void	mv_down(void)
+{
+	int		portal;
+	
 	if (key()->down)
 	{
 		if ((portal = env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.1)]
@@ -76,7 +82,8 @@ void		ft_move(void)
 int			recalc_img(void *param)
 {
 	(void)param;
-	ft_move();
+	mv_up();
+	mv_down();
 	ft_turn();
 	ft_memset(env()->ptr, 0x00, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
 	ft_wolf();

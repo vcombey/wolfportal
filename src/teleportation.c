@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 10:19:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 19:50:42 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 20:40:18 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void	teleport_pos_red(int portal)
 		cam()->pos.x += 0.5;
 	}
 	teleport_rot(portal);
-	cam()->pos.x += cam()->dir.x * 0.1;
-	cam()->pos.y += cam()->dir.y * 0.1;
 }
 
 void	teleport_pos(int portal)

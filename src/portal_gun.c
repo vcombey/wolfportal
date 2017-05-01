@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 08:59:29 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 10:39:46 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 20:57:45 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 void	change_portal_red(void)
 {
-	env()->map[env()->red.x][env()->red.y] = 1;
-	env()->map[env()->wall.x][env()->wall.y] = 3;
+	if (env()->sidered != 0)
+	{
+		env()->map[env()->red.x][env()->red.y] = 1;
+		env()->map[env()->wall.x][env()->wall.y] = 3;
+	}
 	env()->red.x = env()->wall.x;
 	env()->red.y = env()->wall.y;
 	if (env()->side == 0 && cam()->dir.x >= 0)
@@ -31,8 +34,11 @@ void	change_portal_red(void)
 
 void	change_portal_blue(void)
 {
-	env()->map[env()->blue.x][env()->blue.y] = 1;
-	env()->map[env()->wall.x][env()->wall.y] = 4;
+	if (env()->sideblue != 0)
+	{
+		env()->map[env()->blue.x][env()->blue.y] = 1;
+		env()->map[env()->wall.x][env()->wall.y] = 4;
+	}
 	env()->blue.x = env()->wall.x;
 	env()->blue.y = env()->wall.y;
 	if (env()->side == 0 && cam()->dir.x >= 0)

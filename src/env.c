@@ -6,7 +6,7 @@
 /*   By: rbadia <rbadia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:27:53 by rbadia            #+#    #+#             */
-/*   Updated: 2017/05/01 18:22:17 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 20:55:43 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		init_env(char *file)
 	env()->ptr = mlx_get_data_addr(env()->img, &env()->bpp, &env()->size_line,
 	&env()->endian);
 	env()->life = 100;
+	env()->sideblue = 0;
+	env()->sidered = 0;
 	return (0);
 }
