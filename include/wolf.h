@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 14:57:19 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 16:35:56 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ unsigned int		ft_pixelget_img(int x, int y);
 void				draw_portal_gun(void);
 void				cross();
 void				floor_casting(int x, double dist_wall, int y);
-void				trace_portail(int x, double dist_wall, int portal, t_dda dda);
+void				trace_portail(int x, double dist_wall, int portal,
+		t_dda dda);
 void				draw_tourelle(int x, double dist_wall);
 void				ft_trace_line(t_double_pos a, t_double_pos b);
 void				ft_trace_colone(int x, double dist_wall,

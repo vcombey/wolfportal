@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:20:43 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 14:53:31 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 17:18:35 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	hit_portal_blue(double proj, int portal, t_dda dda)
 			(dda.side_dist)->y / proj, portal, dda);
 	env()->wall.x = env()->blue.x;
 	env()->wall.y = env()->blue.y;
-	if (ft_abs(env()->sideblue) == 1)
-		env()->wall.x -= env()->sideblue;
-	else
-		env()->wall.y -= (env()->sideblue / 2);
 	transform_direction_ray_portal(portal, dda);
 }
 
@@ -33,10 +29,6 @@ void	hit_portal_red(double proj, int portal, t_dda dda)
 			(dda.side_dist)->y / proj, portal, dda);
 	env()->wall.x = env()->red.x;
 	env()->wall.y = env()->red.y;
-	if (ft_abs(env()->sidered) == 1)
-		env()->wall.x -= env()->sidered;
-	else
-		env()->wall.y -= (env()->sidered / 2);
 	transform_direction_ray_portal(portal, dda);
 }
 

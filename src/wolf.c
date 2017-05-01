@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 14:51:35 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 16:30:33 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,22 @@ void	ft_init_dist(t_dda dda)
 	}
 }
 
-double	ft_calc_dist(int x, t_dda dda)
+double	ft_calc_dist(double range, t_dda dda)
 {
-	double			range;
 	t_double_pos	side_dist;
 	t_double_pos	delta_dist;
 	t_int_pos		step;
 	double			proj;
-	t_double_pos	cam_pos;
-
-	dda.cam_pos = &cam_pos;
-	dda.cam_pos->x = cam()->pos.x;
-	dda.cam_pos->y = cam()->pos.y;
 
 	dda.side_dist = &side_dist;
 	dda.delta_dist = &delta_dist;
 	dda.step = &step;
+	(dda.cam_pos)->x = cam()->pos.x;
+	(dda.cam_pos)->y = cam()->pos.y;
 	env()->wall.x = (int)cam()->pos.x;
 	env()->wall.y = (int)cam()->pos.y;
-	range = 2 * (double)x / (double)SCREEN_WIDTH - 1;
 	(dda.ray_dir)->x = cam()->dir.x + range * cam()->plane.x;
 	(dda.ray_dir)->y = cam()->dir.y + range * cam()->plane.y;
-	dda.x = x;
 	env()->ray_dir.x = (dda.ray_dir)->x;
 	env()->ray_dir.y = (dda.ray_dir)->y;
 	(dda.delta_dist)->x = sqrt(1 + (env()->ray_dir.y * env()->ray_dir.y) /
@@ -127,14 +121,17 @@ void	ft_wolf(void)
 	double			dist_wall;
 	t_dda			dda;
 	t_double_pos	ray_dir;
+	t_double_pos	cam_pos;
 
+	dda.cam_pos = &cam_pos;
 	dda.ray_dir = &ray_dir;
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		dist_wall = ft_calc_dist(x, dda);
+		dda.x = x;
+		dist_wall = ft_calc_dist(2 * (double)x / (double)SCREEN_WIDTH - 1, dda);
 		if (dist_wall < 600)
-			ft_trace_colone(x, dist_wall, *(dda.ray_dir));
+			ft_trace_colone(x, dist_wall, dda);
 		x++;
 	}
 }
