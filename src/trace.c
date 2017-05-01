@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 19:42:11 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 14:57:59 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_trace_textur(int x, int draw_start, int draw_end, int texx)
 	}
 }
 
-void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
+void		ft_trace_colone(int x, double dist_wall, t_dda dda)
 {
 	int				lineheight;
 	int				draw_start;
@@ -42,14 +42,14 @@ void		ft_trace_colone(int x, double dist_wall, t_double_pos ray_dir)
 	draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
 	draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
 	if (env()->side == 0)
-		wallx = cam()->pos.y + dist_wall * ray_dir.y;
+		wallx = (dda.cam_pos)->y + dist_wall * (dda.ray_dir)->y;
 	else
-		wallx = cam()->pos.x + dist_wall * ray_dir.x;
+		wallx = (dda.cam_pos)->x + dist_wall * (dda.ray_dir)->x;
 	wallx -= (int)wallx;
 	texx = (int)(wallx * (double)WALL_P_WIDTH);
-	if (env()->side == 0 && ray_dir.x > 0)
+	if (env()->side == 0 && (dda.ray_dir)->x > 0)
 		texx = WALL_P_WIDTH - texx - 1;
-	if (env()->side == 1 && ray_dir.y < 0)
+	if (env()->side == 1 && (dda.ray_dir)->y < 0)
 		texx = WALL_P_WIDTH - texx - 1;
 	ft_trace_textur(x, draw_start, draw_end, texx);
 }

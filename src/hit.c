@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:20:43 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 16:55:38 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 14:53:31 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	hit_portal_blue(double proj, int portal, t_dda dda)
 {
 	trace_portail(dda.x, (env()->side == 0) ? (dda.side_dist)->x / proj :
-			(dda.side_dist)->y / proj, portal);
+			(dda.side_dist)->y / proj, portal, dda);
 	env()->wall.x = env()->blue.x;
 	env()->wall.y = env()->blue.y;
 	if (ft_abs(env()->sideblue) == 1)
@@ -30,7 +30,7 @@ void	hit_portal_blue(double proj, int portal, t_dda dda)
 void	hit_portal_red(double proj, int portal, t_dda dda)
 {
 	trace_portail(dda.x, (env()->side == 0) ? (dda.side_dist)->x / proj :
-			(dda.side_dist)->y / proj, portal);
+			(dda.side_dist)->y / proj, portal, dda);
 	env()->wall.x = env()->red.x;
 	env()->wall.y = env()->red.y;
 	if (ft_abs(env()->sidered) == 1)

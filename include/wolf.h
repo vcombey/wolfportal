@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 19:00:05 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 14:57:19 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct		s_env
 	t_int_pos		red;
 	t_int_pos		blue;
 	int				sidered;
+	int				sound;
 	int				sideblue;
 	int				life;
 }					t_env;
@@ -78,6 +79,7 @@ typedef struct		s_dda
 	t_double_pos	*delta_dist;
 	t_int_pos		*step;
 	t_double_pos	*ray_dir;
+	t_double_pos	*cam_pos;
 	int				x;
 }					t_dda;
 
@@ -176,11 +178,11 @@ unsigned int		ft_pixelget_img(int x, int y);
 void				draw_portal_gun(void);
 void				cross();
 void				floor_casting(int x, double dist_wall, int y);
-void				trace_portail(int x, double dist_wall, int portal);
+void				trace_portail(int x, double dist_wall, int portal, t_dda dda);
 void				draw_tourelle(int x, double dist_wall);
 void				ft_trace_line(t_double_pos a, t_double_pos b);
 void				ft_trace_colone(int x, double dist_wall,
-		t_double_pos ray_dir);
+		t_dda dda);
 int					recalc_img(void *param);
 
 #endif

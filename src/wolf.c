@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 17:59:32 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 18:37:06 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/01 14:51:35 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ double	ft_calc_dist(int x, t_dda dda)
 	t_double_pos	delta_dist;
 	t_int_pos		step;
 	double			proj;
+	t_double_pos	cam_pos;
+
+	dda.cam_pos = &cam_pos;
+	dda.cam_pos->x = cam()->pos.x;
+	dda.cam_pos->y = cam()->pos.y;
 
 	dda.side_dist = &side_dist;
 	dda.delta_dist = &delta_dist;
