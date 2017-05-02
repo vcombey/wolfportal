@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 22:47:55 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 21:35:39 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 11:36:34 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	trace_portail(int x, double dist_wall, int portal, t_dda dda)
 		wallx = (dda.cam_pos)->y + dist_wall * (dda.ray_dir)->y;
 	else
 		wallx = (dda.cam_pos)->x + dist_wall * (dda.ray_dir)->x;
-	wallx -= (int)wallx;
+	wallx -= round_neg(wallx);
 	texx = (int)(wallx * (double)portal_blue()->width);
 	if (env()->side == 0 && (dda.ray_dir)->x > 0)
 		texx = portal_blue()->width - texx - 1;

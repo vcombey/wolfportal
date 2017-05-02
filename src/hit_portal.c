@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 21:26:52 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 18:07:17 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 11:18:54 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ void	transform_direction_ray_portal_perpendicular(int portal, t_dda dda)
 	{
 		ft_rev_rot_int(dda.step);
 		ft_rev_rot_double(dda.ray_dir);
+		ft_rev_rot_double(dda.cam_pos);
 	}
 	else if (a > b || (a == 1 && b == 4))
 	{
 		ft_rot_int(dda.step);
 		ft_rot_double(dda.ray_dir);
+		ft_rot_double(dda.cam_pos);
 	}
 	ft_swap_double_pos(dda.side_dist);
-	ft_swap_double_pos(dda.cam_pos);
 }
 
 void	transform_direction_ray_portal(int portal, t_dda dda)

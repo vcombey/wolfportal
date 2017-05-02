@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 14:20:43 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 18:41:54 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 11:42:50 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int		ft_hit(double proj, int portal, t_dda dda)
 	if (portal == 3 && good_side_portal((dda.step), env()->sidered))
 	{
 		hit_portal_red(proj, portal, dda);
-		return (env()->sidered == 0);
+		return (env()->sideblue == 0);
 	}
 	else if (portal == 4 && good_side_portal((dda.step), env()->sideblue))
 	{
 		hit_portal_blue(proj, portal, dda);
-		return (env()->sideblue == 0);
+		return (env()->sidered == 0);
 	}
 	else if (portal == 5)
 	{

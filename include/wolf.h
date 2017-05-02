@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:26 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 16:35:56 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 11:36:16 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,6 @@ void				ft_trace_line(t_double_pos a, t_double_pos b);
 void				ft_trace_colone(int x, double dist_wall,
 		t_dda dda);
 int					recalc_img(void *param);
+int					round_neg(double n);
 
 #endif

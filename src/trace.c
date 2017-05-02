@@ -6,11 +6,19 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 21:34:27 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 11:46:04 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+int		round_neg(double n)
+{
+	if (n > 0)
+		return ((int)n);
+	else
+		return ((int)n - 1);
+}
 
 static void	ft_trace_textur(int x, int draw_start, int draw_end, int texx)
 {
@@ -45,7 +53,7 @@ void		ft_trace_colone(int x, double dist_wall, t_dda dda)
 		wallx = (dda.cam_pos)->y + dist_wall * (dda.ray_dir)->y;
 	else
 		wallx = (dda.cam_pos)->x + dist_wall * (dda.ray_dir)->x;
-	wallx -= (int)wallx;
+	wallx -= round_neg(wallx);
 	texx = (int)(wallx * (double)WALL_P_WIDTH);
 	if (env()->side == 0 && (dda.ray_dir)->x > 0)
 		texx = WALL_P_WIDTH - texx - 1;
