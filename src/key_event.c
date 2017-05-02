@@ -6,7 +6,7 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:31:54 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 20:36:55 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:03:55 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_turn(void)
 	}
 }
 
-void	mv_up(void)
+static void	mv_up(void)
 {
 	int		portal;
 
@@ -61,10 +61,10 @@ void	mv_up(void)
 	}
 }
 
-void	mv_down(void)
+static void	mv_down(void)
 {
 	int		portal;
-	
+
 	if (key()->down)
 	{
 		if ((portal = env()->map[(int)(cam()->pos.x - cam()->dir.x * 0.1)]

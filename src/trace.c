@@ -6,13 +6,13 @@
 /*   By: vcombey <vcombey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/29 20:35:01 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/02 11:46:04 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:04:33 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int		round_neg(double n)
+int			round_neg(double n)
 {
 	if (n > 0)
 		return ((int)n);
