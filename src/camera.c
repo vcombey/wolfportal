@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 19:59:47 by vcombey           #+#    #+#             */
-/*   Updated: 2017/04/28 14:21:36 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:44:44 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		init_cam(void)
 
 void		add_start_position(int i, int j)
 {
-	cam()->pos.x = i + 1 + 0.5;
-	cam()->pos.y = j + 1 + 0.5;
+	cam()->pos.x = i + 0.5;
+	cam()->pos.y = j + 0.5;
 	env()->map[i][j] = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 21:37:03 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 11:04:25 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:45:05 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_key_pressed(int keycode, void *param)
 		key()->left = 1;
 	if (keycode == KEY_ESCAPE)
 	{
-		system("killall afplay");
+		system("killall afplay 2> /dev/null");
 		exit(0);
 	}
 	return (0);

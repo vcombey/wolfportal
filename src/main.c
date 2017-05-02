@@ -6,7 +6,7 @@
 /*   By: vcombey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:00:38 by vcombey           #+#    #+#             */
-/*   Updated: 2017/05/01 11:04:23 by vcombey          ###   ########.fr       */
+/*   Updated: 2017/05/02 12:45:47 by vcombey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int		quit(void *param)
 {
 	(void)param;
-	system("killall afplay");
+	system("killall afplay 2> /dev/null");
 	exit(0);
 	return (0);
 }
