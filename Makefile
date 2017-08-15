@@ -38,7 +38,7 @@ SRC =	main.c			\
 		trace_line.c	\
 		floor_casting.c	\
 
-INCLUDE = -I ./libft -I ./include
+INCLUDE = -I ./libft -I ./include -I ./minilibx_macos/
 
 
 OBJS = $(addprefix objs/, $(SRC:.c=.o))
@@ -48,7 +48,7 @@ all: $(NAME)
 
 $(NAME): dis $(OBJS)
 	make -C ./libft/
-	@gcc -g $(OBJS) -L libft -lft -lmlx -framework OpenGL -framework AppKit -o2 -flto -o $(NAME)
+	@gcc -g $(OBJS) -L libft -lft -lmlx -framework OpenGL -framework AppKit -o2 -flto -L minilibx_macos -lmlx -o $(NAME)
 
 clean:
 	make clean -C ./libft/
