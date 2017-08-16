@@ -18,8 +18,6 @@ s: blue portal;
 directional pad;
 
 Screenshots :
-![]({{site.baseurl}}//Capture%20d%E2%80%99e%CC%81cran%202017-08-17%20a%CC%80%2000.26.28.png)
-
-![]({{site.baseurl}}//Capture%20d%E2%80%99e%CC%81cran%202017-08-17%20a%CC%80%2000.25.34.png)
-
+![ScreenShot](https://raw.github.com/vcombey/wolfportal/blob/master/screenshots/capture-1.png)
+![ScreenShot](https://raw.github.com/vcombey/wolfportal/blob/master/screenshots/capture-2.png)
 
