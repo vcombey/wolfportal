@@ -18,6 +18,6 @@ s: blue portal;
 directional pad;
 
 Screenshots :
-![ScreenShot](https://raw.github.com/vcombey/wolfportal/blob/master/screenshots/capture-1.png)
-![ScreenShot](https://raw.github.com/vcombey/wolfportal/blob/master/screenshots/capture-2.png)
+![ScreenShot](https://raw.github.com/vcombey/wolfportal/master/screenshots/capture-1.png)
+![ScreenShot](https://raw.github.com/vcombey/wolfportal/master/screenshots/capture-2.png)
 
