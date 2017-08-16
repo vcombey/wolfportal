@@ -1,6 +1,25 @@
 # Wolf3d
 
+a 42 project : "_This project is inspired by the world-famous eponymous 90’s game, which
+was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to
+make a dynamic view inside a maze, in which you’ll have to find your way_"
+
+I added portals, portal gun and turret for the fun.
+
+to test it : 
+	git clone https://github.com/vcombey/wolfportal.git ~/wolfportal
+    cd ~/wolfportal
+    make
+    ./wolf3d maps/portal_map
+
 Controls :
 z: orange portal;
 s: blue portal;
 directional pad;
+
+Screenshots :
+![]({{site.baseurl}}//Capture%20d%E2%80%99e%CC%81cran%202017-08-17%20a%CC%80%2000.26.28.png)
+
+![]({{site.baseurl}}//Capture%20d%E2%80%99e%CC%81cran%202017-08-17%20a%CC%80%2000.25.34.png)
+
+
